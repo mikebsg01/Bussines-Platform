@@ -1,0 +1,34 @@
+{
+	"name": "cviebrock/laravel-elasticsearch",
+	"description": "An easy way to use the official PHP ElasticSearch client in your Laravel applications",
+	"keywords": [
+		"laravel",
+		"elasticsearch",
+		"search",
+		"client"
+	],
+	"require": {
+		"php": ">=5.4.0",
+		"elasticsearch/elasticsearch": "^2.0",
+		"illuminate/support": "~4|~5",
+		"monolog/monolog": "~1"
+	},
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Colin Viebrock",
+			"email": "colin@viebrock.ca"
+		},
+		{
+			"name": "Brandon Martel",
+			"email": "brandonmartel@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Cviebrock\\LaravelElasticsearch\\": "src/"
+		}
+	},
+	"minimum-stability": "stable",
+	"prefer-stable": true
+}

@@ -1,0 +1,182 @@
+@import "fonts", "general";
+
+
+/* =========== Body [INIT] ======== */
+
+
+@keyframes animatedBackground {
+  0% { 
+    background-size: 100% 100%;
+  }
+
+  50% {
+    background-size: 110% 110%;
+  }
+
+  100% {
+    background-size: 100% 100%;
+  }
+}
+
+.bg-register {
+  // background-image: url("../img/bg-register.png");
+  // background-size: cover;
+  // background-attachment: fixed;
+  // background-position: top left;
+  // background-repeat: no-repeat;
+  // animation: animatedBackground 20s linear infinite;
+  background-image: url('../img/bg-side-right.png');
+  background-position: top right;
+  background-size: contain;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.bg-register-1 {
+  background-image: url('../img/bg-register-1.png');
+  background-position: top right;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.bg-login {
+  background-image: url('../img/bg-side-left.png');
+  background-position: top left;
+  background-size: contain;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.trap-gray-aside-left {
+  background-image: url('../img/trap-gray-aside-left.png');
+  background-position: top left;
+  background-size: contain;
+  //background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.trap-red-aside-left {
+  background-image: url('../img/trap-red-aside-left.png');
+  background-position: top left;
+  background-size: contain;
+  //background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* =========== Body [END] ======== */
+
+/* =========== Navbar [INIT] ======== */
+
+.app-navbar {
+  background-color: #FFFFFF;
+  border-radius: 0;
+  min-height: 66px;
+  height: 66px;
+  font-family: "Futura Book", sans-serif;
+  box-shadow: 1px 2px 3px rgba(223,223,223,0.8);
+}
+
+.navbar-space {
+  height: 67px;
+}
+
+.app-navbar .navbar-nav > li > a {
+  color: #333333;
+  font-size: 16px;
+  line-height: 36px;
+  text-shadow: none;
+  font-weight: lighter;
+}
+
+.app-navbar .navbar-nav > li > a:hover,
+.app-navbar .nav > li > a:hover, 
+.app-navbar .nav > li > a:focus,
+.app-navbar .nav .open > a, 
+.app-navbar .nav .open > a:hover, 
+.app-navbar .nav .open > a:focus {
+  background-color: inherit;
+  -webkit-box-shadow: inset 0px -5px 0px 0px rgba(238, 50, 36, 1);
+  -moz-box-shadow:    inset 0px -5px 0px 0px rgba(238, 50, 36, 1);
+  box-shadow:         inset 0px -5px 0px 0px rgba(238, 50, 36, 1);
+}
+
+.app-navbar .dropdown-menu {
+  background-color: #FFFFFF;
+}
+
+.app-navbar .dropdown-menu > li > a {
+  color: #333333;
+  text-align: center;
+}
+
+.app-navbar .dropdown-menu > li > a:hover {
+  background-color: #EE3224;
+  color: #FFFFFF;
+}
+
+.app-navbar .navbar-brand {
+  color: #FFFFFF;
+  padding: 4px 4px 4px 25px;
+}
+
+.app-navbar .navbar-brand .aem-logo {
+  height: 59px;
+  width: 232px;
+  background-image: url("../img/aem-logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.app-navbar-breadcrumb {
+  min-height: 50px;
+  background-color: #333;
+  border-top: 1px solid #2E2E2E;
+}
+
+.app-navbar-breadcrumb .navbar-nav > li > a,
+.app-navbar-breadcrumb .navbar-nav > li {
+  color: #B5B5B5;
+  font-family: "Futura Book", sans-serif;
+  font-size: 16px;
+  line-height: 30px;
+  text-shadow: none;
+  font-weight: lighter;
+}
+
+.app-navbar-breadcrumb .navbar-nav > li.no-link {
+  padding: 15px 0;
+}
+
+.app-navbar-breadcrumb .navbar-nav > li.active > a,
+.app-navbar-breadcrumb .navbar-nav > li > a:hover,
+.app-navbar-breadcrumb .nav > li > a:hover, 
+.app-navbar-breadcrumb .nav > li > a:focus,
+.app-navbar-breadcrumb .nav .open > a, 
+.app-navbar-breadcrumb .nav .open > a:hover, 
+.app-navbar-breadcrumb .nav .open > a:focus {
+  background-color: inherit;
+  color: #FFFFFF;
+}
+
+.app-navbar-breadcrumb .link-active {
+  font-size: 6px;
+  position: absolute;
+  top: 70%;
+  left: 45%;
+}
+
+.app-navbar-breadcrumb .go-to-back {
+  background-color: #2B2B2B;
+}
+
+.app-navbar-breadcrumb .go-to-back:hover,
+.app-navbar-breadcrumb .go-to-back:focus {
+  background-color: #252525;
+}
+
+/* =========== Navbar [END] ======== */
+
+@import "tablet", "desktop", "bigdesktop";
+
+@import "required";
