@@ -1,0 +1,93 @@
+// ROUTER
+// Implementación de nuevos métodos en la clase Route
+// en la ubicación siguiente:
+// {app_core_path}\vendor\laravel\framework\src\Illuminate\Routing\Route.php
+...
+
+public function getPrefix()
+{
+    return isset($this->action['prefix']) ? $this->action['prefix'] : null;
+}
+
+/**
+ * Get the name of the route instance.
+ *
+ * @return string
+ */
+public function getName()
+{
+    return isset($this->action['as']) ? $this->action['as'] : null;
+}
+...
+
+
+// PROCESO DE REGISTRO
+// Cambiar  el proceso de registro estándar para implementar el envió
+// de correo electrónico para la verificación de un usuario.
+// {app_core_path}\vendor\laravel\framework\src\Illuminate\Foundation\Auth\RegistersUsers.php
+...
+
+public function register(Request $request)
+{
+    $validator = $this->validator($request->all());
+
+    if ($validator->fails()) {
+        $this->throwValidationException(
+            $request, $validator
+        );
+    }
+
+    //Auth::guard($this->getGuard())->login($this->create($request->all()));
+
+    return redirect($this->redirectPath());
+}
+
+...
+
+/*================== Deploy Laravel Application ================*/
+
+// COMANDOS DEL SERVIDOR
+// Actualización de las configuraciones por defecto del framework, 
+// en la siguiente ubicación:
+// {app_core_path}\vendor\laravel\framework\src\Illuminate\Foundation\Console\ServeCommand.php
+...
+
+public function fire()
+{
+    chdir('/'); /* <== chdir($this->laravel->publicPath()) */
+
+    $host = $this->input->getOption('host');
+
+    $port = $this->input->getOption('port');
+...
+
+// RUTA DEL SERVIDOR
+// Actualización de las configuraciones por defecto del framework, 
+// en la siguiente ubicación:
+// {app_core_path}\server.php
+...
+if ($uri !== '/' && file_exists(__DIR__.'/public'.$uri)) {
+    return false;
+}
+
+require_once __DIR__.'/../platform/index.php';
+/* ^^^ require_once __DIR__.'/public/index.php'; */
+...
+
+// RUTA DEL DIRECTORIO PUBLIC
+// Cambiar la variable global 'path.public' en la siguiente ubicación:
+// {app_core_path}\app\Providers\AppServiceProvider.php
+...
+  /**
+   * Register any application services.
+   *
+   * @return void
+   */
+  public function register()
+  {
+    $this->app->bind('path.public', function() {
+      return base_path().'/../platform';
+    });
+    /* ^^^ Implementación */
+  }
+...
