@@ -95,7 +95,7 @@
                   </div>
                   <div class="col-xs-6">
                     <p class="text-center"> 
-                      {{ Form::select('sector_id', \App\Sector::getSectorOptions(), $enterprise->sector_id, ['class' => 'form-control chosen-select' . ($errors->has('sector_id') ? ' has-error' : ''), 'required' => 'required']) }}
+                      {{ Form::select('sector_id', \App\Sector::getOptions(), $enterprise->sector_id, ['class' => 'form-control chosen-select' . ($errors->has('sector_id') ? ' has-error' : ''), 'required' => 'required']) }}
                     </p>
                   </div>
                 </div>

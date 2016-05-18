@@ -73,101 +73,112 @@
       <div class="col-xs-9 no-padding">
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="profile">
-            <div class="col-xs-8 no-padding special-padding-2">
-              <div class="col-xs-12 no-padding">
-                <h2 class="special-title-6"> DESCRIPCIÓN DE LA EMPRESA </h2>
-              </div>
-              <div class="col-xs-12 no-padding profile-description bottom-margin">
-                <div class="col-xs-12 no-padding top-margin">
-                  <p> {{ $enterprise->description }} </p>
+            <div class="col-xs-8 special-padding-2 data-container main-space">
+              <div class="col-xs-12 no-padding data-box">
+                <h3 class="data-title"> DESCRIPCIÓN DE LA EMPRESA </h3>
+                <div class="col-xs-12 no-padding">
+                  <p class="data-content">
+                    {{ $enterprise->description }}
+                  </p>
                 </div>
               </div>
-              <div class="col-xs-12 no-padding">
-                <div class="divider"></div>
-              </div>
-              <div class="col-xs-12 no-padding">
-                <h2 class="special-title-6 margin-top-30px"> INFORMACIÓN COMERCIAL </h2>
-              </div>
-              <div class="col-xs-12 no-padding profile-commercial bottom-margin">
-                <div class="col-xs-12 no-padding top-margin">
+              <div class="col-xs-12 no-padding data-box">
+                <div class="col-xs-12 no-padding">
+                  <h3 class="data-title"> INFORMACIÓN COMERCIAL </h3>
+                </div>
+                <div class="col-xs-12 no-padding">
                   <div class="col-xs-6 no-padding">
-                    <h3> Sector/Industria: </h3>
+                    <h4 class="data-label"> 
+                      Sector / Industria:
+                    </h4> 
                   </div>
-                  <div class="col-xs-6">
-                    <p class="text-center"> {{ $enterprise->sector->name }} </p>
+                  <div class="col-xs-6 no-padding">
+                    <p class="data-content text-center">
+                      {{ $enterprise->sector->name }}
+                    </p>
                   </div>
                 </div>
-                <div class="col-xs-12 no-padding top-margin">
+                <div class="col-xs-12 no-padding">
                   <div class="col-xs-6 no-padding">
-                    <h3> Productos/Servicios: </h3>
+                    <h4 class="data-label"> 
+                      Productos / Servicios:
+                    </h4> 
                   </div>
-                  <div class="col-xs-6">
-                    <p class="text-center"> {{ arrayToTags($enterprise->commercial->products_and_services, ", ") }} </p>
+                  <div class="col-xs-6 no-padding">
+                    <p class="data-content">
+                      {{ arrayToTags($enterprise->commercial->products_and_services, ", ") }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-xs-12 no-padding">
+                  <div class="col-xs-6 no-padding">
+                    <h4 class="data-label"> 
+                      Afiliaciones:
+                    </h4> 
+                  </div>
+                  <div class="col-xs-6 no-padding">
+                    <p class="data-content">
+                      {{ arrayToTags($enterprise->commercial->affiliations, ", ") }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-xs-12 no-padding">
+                  <div class="col-xs-6 no-padding">
+                    <h4 class="data-label"> 
+                      Certificaciones:
+                    </h4> 
+                  </div>
+                  <div class="col-xs-6 no-padding">
+                    <p class="data-content">
+                      {{ arrayToTags($enterprise->commercial->certifications, ", ") }}
+                    </p>
                   </div>
                 </div>
               </div>
-              <div class="col-xs-12 no-padding">
-                <div class="divider"></div>
-              </div>
-              <div class="col-xs-12 no-padding">
-                <h2 class="special-title-6 margin-top-30px"> DETALLES DE LA EMPRESA </h2>
-              </div>
-              <div class="col-xs-12 no-padding profile-details">
-                <div class="col-xs-12 no-padding margin-top-15px">
+              <div class="col-xs-12 no-padding data-box">
+                <div class="col-xs-12 no-padding">
+                  <h3 class="data-title"> DETALLES DE LA EMPRESA </h3>
+                </div>
+                <div class="col-xs-12 no-padding">
                   <div class="col-xs-6 no-padding">
-                    <h3> Razón Social: </h3>
+                    <h4 class="data-label"> 
+                      Razón Social:
+                    </h4> 
                   </div>
-                  <div class="col-xs-6">
-                    <p class="text-center"> {{ $enterprise->fiscal_name }} </p>
+                  <div class="col-xs-6 no-padding">
+                    <p class="data-content text-center">
+                      {{ $enterprise->fiscal_name }}
+                    </p>
                   </div>
                 </div>
-                <div class="col-xs-12 no-padding margin-top-15px">
+                <div class="col-xs-12 no-padding">
                   <div class="col-xs-6 no-padding">
-                    <h3> No. de empleados: </h3>
+                    <h4 class="data-label"> 
+                      Tamaño de la empresa:
+                    </h4> 
                   </div>
-                  <div class="col-xs-6">
-                    <p class="text-center"> {{ $enterprise->commercial->num_employees }} empleados </p>
+                  <div class="col-xs-6 no-padding">
+                    <p class="data-content text-center">
+                      ---
+                    </p>
+                  </div>
+                </div>
+                <div class="col-xs-12 no-padding">
+                  <div class="col-xs-6 no-padding">
+                    <h4 class="data-label"> 
+                      Número de empleados:
+                    </h4> 
+                  </div>
+                  <div class="col-xs-6 no-padding">
+                    <p class="data-content text-center">
+                      {{ $enterprise->commercial->num_employees }}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-xs-4 special-padding-3">
-              <div class="col-xs-12 no-padding">
-                <h2 class="special-title-7"> INFORMACIÓN DE CONTACTO </h2>
-              </div>
-              <div class="col-xs-12 no-padding profile-contact bottom-margin">
-                <div class="col-xs-12 no-padding top-margin">
-                  <h3> Correo electrónico: </h3>
-                  <p>
-                    <a href="mailto:{{ $enterprise->email }}">{{ $enterprise->email }}</a>
-                  </p>
-                </div>
-                <div class="col-xs-12 no-padding top-margin">
-                  <h3> Dirección: </h3>
-                  <p> {{ $enterprise->address }} </p>
-                </div>
-                <div class="col-xs-12 no-padding top-margin">
-                  <h3> Teléfono: </h3>
-                  <p>{{ $enterprise->phone_lada_only_digits }} {{ $enterprise->phone_number }} </p>
-                </div>
-                <div class="col-xs-12 no-padding top-margin">
-                  <h3> Página Web: </h3>
-                  <p>
-                    <a target="_blank" href="{{ $enterprise->url_website }}">{{ $enterprise->url_website }}</a>
-                  </p>
-                </div>
-              </div>
-              <div class="col-xs-12 no-padding">
-                <div class="divider"></div>
-              </div>
-              <div class="col-xs-12 no-padding">
-                <h2 class="special-title-7 margin-top-30px"> REDES SOCIALES </h2>
-                <div class="col-xs-12 no-padding bottom-margin profile-social">
-                  <span class="fa fa-facebook-square profile-icon profile-icon-fb"></span>
-                  <span class="fa fa-twitter-square profile-icon profile-icon-tw"></span>
-                  <span class="fa fa-linkedin-square profile-icon profile-icon-in"></span>
-                </div>
-              </div>
+
             </div>
           </div>
           <div role="tabpanel" class="tab-pane" id="my-meetings">B</div>

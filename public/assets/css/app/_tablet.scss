@@ -283,6 +283,39 @@
   margin-bottom: 5px;
 }
 
+.data-container .data-box {
+  padding: 15px;
+  border-bottom: 1px solid #CCC;
+}
+
+.data-container .data-box:last-child {
+  border-bottom: none;
+}
+
+.data-container .data-box .data-title {
+  margin: 10px auto 15px auto;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-family: "Futura Heavy", sans-serif;
+  color: #EF4B3F;
+}
+
+.data-container .data-box .data-label {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: "Futura Light", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.data-container .data-box .data-content {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: "Futura Light", sans-serif;
+  color: #555555;
+  font-size: 16px;
+}
+
 .main-search-header {
   font-family: "Futura Book", sans-serif;
   color: #EE3224;
