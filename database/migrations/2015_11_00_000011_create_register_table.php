@@ -22,7 +22,7 @@ class CreateRegisterTable extends Migration
               ->references('id')->on('users')
               ->onDelete('cascade');
 
-      foreach (Register::getSteps() as $step )
+      foreach (Register::getSteps() as $step)
       {
         $table->boolean($step);
       }

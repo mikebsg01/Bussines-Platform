@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCountriesTable extends Migration
+class CreateLadasTable extends Migration
 {
   /**
    * Run the migrations.
@@ -12,10 +12,9 @@ class CreateCountriesTable extends Migration
    */
   public function up()
   {
-    Schema::create('countries', function (Blueprint $table) {
+    Schema::create('ladas', function (Blueprint $table) {
       $table->increments('id');
-      $table->string('key', 5);
-      $table->string('value' )->nullable();
+      $table->string('key_name', 5);
       $table->timestamps();
     });
   }
@@ -27,6 +26,6 @@ class CreateCountriesTable extends Migration
    */
   public function down()
   {
-    Schema::drop('countries');
+    Schema::drop('ladas');
   }
 }

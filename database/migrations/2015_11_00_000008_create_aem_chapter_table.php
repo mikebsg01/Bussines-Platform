@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEnterprisesStatusTable extends Migration
+class CreateAemChapterTable extends Migration
 {
   /**
    * Run the migrations.
@@ -12,9 +12,9 @@ class CreateEnterprisesStatusTable extends Migration
    */
   public function up()
   {
-    Schema::create('enterprises_status', function (Blueprint $table) {
+    Schema::create('aem_chapter', function (Blueprint $table) {
       $table->increments('id');
-      $table->string('status', 60);
+      $table->string('key_name');
       $table->timestamps();
     });
   }
@@ -26,6 +26,6 @@ class CreateEnterprisesStatusTable extends Migration
    */
   public function down()
   {
-    Schema::drop('enterprises_status');
+    Schema::drop('aem_chapter');
   }
 }

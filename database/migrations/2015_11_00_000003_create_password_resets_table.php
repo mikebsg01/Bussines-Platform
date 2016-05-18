@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAemTypesTable extends Migration
+class CreatePasswordResetsTable extends Migration
 {
   /**
    * Run the migrations.
@@ -12,11 +12,10 @@ class CreateAemTypesTable extends Migration
    */
   public function up()
   {
-    Schema::create('aem_types', function (Blueprint $table) {
-      $table->increments('id');
-      $table->string('key');
-      $table->string('value')->nullable();
-      $table->timestamps();
+    Schema::create('password_resets', function (Blueprint $table) {
+      $table->string('email')->index();
+      $table->string('token')->index();
+      $table->timestamp('created_at');
     });
   }
 
@@ -27,6 +26,6 @@ class CreateAemTypesTable extends Migration
    */
   public function down()
   {
-    Schema::drop('aem_types');
+    Schema::drop('password_resets');
   }
 }

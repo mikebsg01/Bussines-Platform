@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AEM_Type extends Model
+class AEM_Chapter extends Model
 {
   protected $table = "aem_types";
 
@@ -21,7 +21,7 @@ class AEM_Type extends Model
   public static function getOptions()
   {
     $arrAEMTypes = ['' => 'Selecciona...'];
-    $objAEMTypes = AEM_Type::orderBy('id', 'ASC')->where('id', '>', 1)->lists('value', 'id');
+    $objAEMTypes = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('value', 'id');
 
     foreach ($objAEMTypes as $key => $value)
     {
