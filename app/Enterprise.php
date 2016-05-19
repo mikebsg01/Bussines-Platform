@@ -79,9 +79,34 @@ class Enterprise extends Model implements SluggableInterface
     return $this->belongsTo('App\Enterprise_Type');
   }
 
+  public function enterprise_num_employees()
+  {
+    return $this->belongsTo('App\Enterprise_Num_Employees');
+  }
+
+  public function roles()
+  {
+    return $this->belongsToMany('App\Role', 'enterprise_role');
+  }
+
   public function lada()
   {
     return $this->belongsTo('App\Lada');
+  }
+
+  public function affiliations()
+  {
+    return $this->belongsToMany('App\Affiliation', 'enterprise_affiliation');
+  }
+
+  public function certifications()
+  {
+    return $this->belongsToMany('App\Certification', 'enterprise_certification');
+  }
+
+  public function products()
+  {
+    return $this->belongsToMany('App\Product', 'enterprise_product');
   }
 
   public function getPhoneLadaOnlyDigitsAttribute()

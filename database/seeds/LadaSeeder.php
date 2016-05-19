@@ -11,21 +11,24 @@ class LadaSeeder extends Seeder
    */
   public function run()
   {
-    $ladas = config('variables.lada');
+    $ladas = array_keys(config('variables.lada'));
+
+    $tmp_date = date('Y-m-d H:i:s');
 
     DB::table('ladas')->insert([ 
-      'key'           => 'NONE',
-      'value'         => '',
-      'created_at'    => date('Y-m-d H:i:s'),
-      'updated_at'    => date('Y-m-d H:i:s')
+      'key_name'      => 'NONE',
+      'created_at'    => $tmp_date,
+      'updated_at'    => $tmp_date
     ]);
 
-    foreach( $ladas as $key => $value ) {
+    foreach( $ladas as $key_name ) {
+
+      $tmp_date = date('Y-m-d H:i:s');
+
       DB::table('ladas')->insert([ 
-        'key'           => $key,
-        'value'         => $value,
-        'created_at'    => date('Y-m-d H:i:s'),
-        'updated_at'    => date('Y-m-d H:i:s')
+        'key_name'      => $key_name,
+        'created_at'    => $tmp_date,
+        'updated_at'    => $tmp_date
       ]);
     }
   }

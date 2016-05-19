@@ -11,19 +11,24 @@ class SectorSeeder extends Seeder
    */
   public function run()
   {
-    $sectors = config('variables.sector');
+    $sectors = array_keys(config('variables.sector'));
+
+    $tmp_date = date('Y-m-d H:i:s');
 
     DB::table('sectors')->insert([ 
-      'name'          => 'NONE',
-      'created_at'    => date('Y-m-d H:i:s'),
-      'updated_at'    => date('Y-m-d H:i:s')
+      'key_name'    => 'NONE',
+      'created_at'  => $tmp_date,
+      'updated_at'  => $tmp_date
     ]);
 
-    foreach( $sectors as $sector => $value ) {
+    foreach( $sectors as $key_name ) {
+
+      $tmp_date = date('Y-m-d H:i:s');
+
       DB::table('sectors')->insert([ 
-        'name'          => $value,
-        'created_at'    => date('Y-m-d H:i:s'),
-        'updated_at'    => date('Y-m-d H:i:s')
+        'key_name'    => $key_name,
+        'created_at'  => $tmp_date,
+        'updated_at'  => $tmp_date
       ]);
     }
   }

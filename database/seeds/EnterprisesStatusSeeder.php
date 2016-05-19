@@ -11,24 +11,24 @@ class EnterprisesStatusSeeder extends Seeder
    */
   public function run()
   {
-    $status = config('variables.enterprise_status');
+    $status = array_keys(config('variables.enterprise_status'));
     
     $tmp_date = date('Y-m-d H:i:s');
 
-    DB::table('enterprises_status')->insert([
-      'status'        => 'NONE',
+    DB::table('enterprise_status')->insert([
+      'key_name'        => 'NONE',
       'created_at'    => $tmp_date,
       'updated_at'    => $tmp_date 
     ]);
 
-    foreach ($status as $s) 
+    foreach ($status as $key_name) 
     {
       $tmp_date = date('Y-m-d H:i:s');
 
-      DB::table('enterprises_status')->insert([
-        'status'        => $s,
-        'created_at'    => $tmp_date,
-        'updated_at'    => $tmp_date 
+      DB::table('enterprise_status')->insert([
+        'key_name'    => $key_name,
+        'created_at'  => $tmp_date,
+        'updated_at'  => $tmp_date 
       ]);
     }
   }

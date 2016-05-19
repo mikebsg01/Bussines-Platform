@@ -11,21 +11,24 @@ class CountrySeeder extends Seeder
    */
   public function run()
   {
-    $countries = config('variables.countries');
+    $countries = array_keys(config('variables.countries'));
+
+    $tmp_date = date('Y-m-d H:i:s');
 
     DB::table('countries')->insert([
-      'key'           => 'NONE',
-      'value'         => '',
-      'created_at'    => date('Y-m-d H:i:s'),
-      'updated_at'    => date('Y-m-d H:i:s')
+      'key_name'    => 'NONE',
+      'created_at'  => $tmp_date,
+      'updated_at'  => $tmp_date
     ]);
 
-    foreach ($countries as $key => $value) {
+    foreach ($countries as $key_name) {
+
+      $tmp_date = date('Y-m-d H:i:s');
+
       DB::table('countries')->insert([
-        'key'         => $key,
-        'value'       => $value,
-        'created_at'  => date('Y-m-d H:i:s'),
-        'updated_at'  => date('Y-m-d H:i:s')
+        'key_name'    => $key_name,
+        'created_at'  => $tmp_date,
+        'updated_at'  => $tmp_date
       ]);
     }
   }

@@ -35,7 +35,6 @@ class CreateEnterprisesTable extends Migration
       $table->string('email');
       $table->string('url_website');
       $table->integer('enterprise_num_employees_id')->unsigned();
-      $table->integer('enterprise_role_id')->unsigned();
       $table->string('num_employees', 15);
       $table->date('year_established');
       $table->text('schedule');
@@ -81,10 +80,6 @@ class CreateEnterprisesTable extends Migration
 
       $table->foreign('enterprise_num_employees_id')
               ->references('id')->on('enterprise_num_employees');
-              // ->onDelete('cascade');
-
-      $table->foreign('enterprise_role_id')
-              ->references('id')->on('enterprise_roles');
               // ->onDelete('cascade');
 
       $table->timestamps();

@@ -542,7 +542,7 @@
       'Other' => 'Other',
     ],
 
-    'aem_type' => [
+    'aem_chapter' => [
       'aem_qro'         => 'AEM Querétaro',
       'aem_df'          => 'AEM Distrito Federal',
       'aem_monterrey'   => 'AEM Monterrey', 
@@ -596,8 +596,8 @@
     ],
 
     'enterprise_status' => [
-      'verified',
-      'not_verified'
+      'verified' => 'Verificada',
+      'not_verified' => 'No verificada'
     ],
 
     'register_as' => [
