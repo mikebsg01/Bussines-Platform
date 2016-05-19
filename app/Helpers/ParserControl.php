@@ -98,3 +98,10 @@
     $final_str  = $fc.mb_substr($str, 1);
     return $final_str;
   }
+
+  function cucwords($str)
+  {
+    $str_lower    = mb_strtolower($str,'UTF-8');
+    $str_ucwords  = mb_convert_case($str_lower , MB_CASE_TITLE, "UTF-8");
+    return $str_ucwords;
+  }

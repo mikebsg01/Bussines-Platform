@@ -15,7 +15,7 @@ class Register extends Model
 
   public function __construct($attributes = array())
   {
-    foreach(Register::getSteps() as $steps)
+    foreach(self::getSteps() as $steps)
     {
       array_push($this->fillable, $steps);
     }
@@ -37,14 +37,14 @@ class Register extends Model
 
   public static function getSteps()
   {
-    $steps = array_keys(Register::getRoutes());
+    $steps = array_keys(self::getRoutes());
 
     return $steps;
   }
 
   public static function stepName($route_name)
   {
-    $routes     = Register::getRoutes();
+    $routes     = self::getRoutes();
     $step_name  = arrayGetParentName($route_name, $routes);
 
     return $step_name;
@@ -57,14 +57,14 @@ class Register extends Model
 
   public static function getIndexStep($step_name)
   {
-    $steps  = Register::getSteps();
+    $steps  = self::getSteps();
 
     return array_search($step_name, $steps);
   }
 
   public static function getIndexFinalStep()
   {
-    $steps  = Register::getSteps();
+    $steps  = self::getSteps();
 
     return count($steps);
   }
@@ -73,9 +73,9 @@ class Register extends Model
   {
     if (isset($idx) && is_int($idx))
     {
-      if ($idx >= 0 && $idx < Register::getIndexFinalStep()) 
+      if ($idx >= 0 && $idx < self::getIndexFinalStep()) 
       {
-        $all_steps = Register::getSteps();
+        $all_steps = self::getSteps();
 
         return $all_steps[$idx];
       }
@@ -88,9 +88,9 @@ class Register extends Model
   {
     if (isset($idx) && is_int($idx))
     {
-      if ($idx >= 0 && $idx < Register::getIndexFinalStep()) 
+      if ($idx >= 0 && $idx < self::getIndexFinalStep()) 
       {
-        $all_routes         = Register::getRoutes();
+        $all_routes         = self::getRoutes();
         $all_steps          = array_keys($all_routes);
         $step_name          = $all_steps[$idx];
         $route              = $all_routes[$step_name];
@@ -104,7 +104,7 @@ class Register extends Model
   public function getNextStepAttribute()
   {
     $register   = $this;
-    $steps      = Register::getSteps();
+    $steps      = self::getSteps();
 
     foreach($steps as $step)
     {
@@ -118,7 +118,7 @@ class Register extends Model
 
   public function getNextStepRouteAttribute()
   {
-    $routes = Register::getRoutes();
+    $routes = self::getRoutes();
 
     return route( $routes[ $this->nextStep ][0] );
   }
@@ -131,7 +131,7 @@ class Register extends Model
   public function updateProgress($step)
   {
     $register = $this;
-    $steps    = Register::getSteps();
+    $steps    = self::getSteps();
 
     if (in_array($step, $steps))
     {
@@ -145,7 +145,7 @@ class Register extends Model
   public function getProgressWithCurrentStepAttribute()
   {
     $register   = $this;
-    $steps      = Register::getSteps(); // Dimensional array
+    $steps      = self::getSteps(); // Dimensional array
     $progress   = [];
 
     foreach($steps as $step)

@@ -6,17 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enterprise_Type extends Model
 {
-  protected $table = "enterprise_types";
+  protected $table = 'enterprise_types';
 
   protected $fillable = [
-    'key',
-    'value'
+    'key_name'
   ];
+
+  public function enterprises()
+  {
+    return $this->hasMany('App\Enterprise');
+  }
 
   public static function getOptions()
   {
     $arrEnterpriseTypes = ['', 'Selecciona..'];
-    $objEnterpriseTypes = Enterprise_Type::orderBy('id', 'ASC')->where('id', '>', 1)->lists('value', 'id');
+    $objEnterpriseTypes = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
 
     foreach( $objEnterpriseTypes as $key => $value ) 
     {

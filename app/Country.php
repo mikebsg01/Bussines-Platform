@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model 
 {
 
-  protected $table = "countries";
+  protected $table = 'countries';
 
   protected $fillable = [
-    'key',
-    'value'
+    'key_name',
   ];
 
   public function enterprise()
@@ -22,7 +21,7 @@ class Country extends Model
   public static function getOptions()
   {
     $arrCountries = ['' => 'Selecciona...'];
-    $objCountries = Country::orderBy('id', 'ASC')->where('id', '>', 1)->lists('value', 'id');
+    $objCountries = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
     
     foreach ($objCountries as $key => $value) {
       $arrCountries[$key] = $value;

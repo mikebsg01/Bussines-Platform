@@ -21,27 +21,32 @@ class Enterprise extends Model implements SluggableInterface
   protected $table = "enterprises";
 
   protected $fillable = [
-    'name', 
-    'description',
-    'fiscal_name',
-    'country_id',       
-    'state',         
-    'city',  
-    'aem_type_id',        
-    'address',
-    'codepostal',  
-    'phone_lada_id',   
-    'phone_number',  
-    'email',
-    'work_position',
-    'url_website',
-    'url_logo',
-    'url_video',
-    'registered_as',
-    'user_id',    
+    'user_id',
     'sector_id',
-    'enterprise_status_id',
-    'slug'      
+    'enterprise_type_id',
+    'enterprise_type_id',
+    'country_id',
+    'aem_chapter_id',
+    'name',
+    'slug',
+    'fiscal_name',
+    'description',
+    'url_logo',
+    'state',
+    'city',
+    'address',
+    'codepostal',
+    'phone_lada_id',
+    'phone_number',
+    'email',
+    'url_website',
+    'enterprise_num_employees_id',
+    'enterprise_role_id',
+    'num_employees',
+    'year_established',
+    'schedule',
+    'url_video',
+    'incomes_year_current'
   ];
 
   public function user() 
@@ -49,24 +54,19 @@ class Enterprise extends Model implements SluggableInterface
     return $this->belongsTo('App\User');
   }
 
-  public function country() 
-  {
-    return $this->belongsTo('App\Country');
-  }
-
-  public function aem_type()
-  {
-    return $this->belongsTo('App\AEM_Type');
-  }
-
   public function sector()
   {
     return $this->belongsTo('App\Sector');
   }
 
-  public function commercial()
+  public function country() 
   {
-    return $this->hasOne('App\Commercial');
+    return $this->belongsTo('App\Country');
+  }
+
+  public function aem_chapter()
+  {
+    return $this->belongsTo('App\AEM_Chapter');
   }
 
   public function enterprise_status()
@@ -74,7 +74,12 @@ class Enterprise extends Model implements SluggableInterface
     return $this->belongsTo('App\Enterprise_Status');
   }
 
-  public function phone_lada()
+  public function enterprise_type()
+  {
+    return $this->belongsTo('App\Enterprise_Type');
+  }
+
+  public function lada()
   {
     return $this->belongsTo('App\Lada');
   }
@@ -82,7 +87,7 @@ class Enterprise extends Model implements SluggableInterface
   public function getPhoneLadaOnlyDigitsAttribute()
   {
     $digits = null;
-    $str    = $this->phone_lada->value;
+    $str    = $this->lada->value;
     preg_match("/(\(+.+\))/", $str, $digits);
 
     if (is_array($digits) && count($digits) > 0)

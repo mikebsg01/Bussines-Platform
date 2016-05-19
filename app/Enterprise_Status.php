@@ -9,7 +9,7 @@ class Enterprise_Status extends Model
   protected $table = "enterprises_status";
 
   protected $fillable = [
-    'status'
+    'key_name'
   ];
 
   public function enterprises()
@@ -19,11 +19,11 @@ class Enterprise_Status extends Model
 
   public static function getOptions()
   {
-    $arrStatus = ['' => 'Status de la empresa..'];
-    $objStatus = Enterprise_Status::orderBy('id', 'ASC')->where('id', '>', 1)->lists('status', 'id');
+    $arrStatus = ['' => 'Status de la empresa...'];
+    $objStatus = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
 
-    foreach( $objStatus as $id => $status ) {
-      $arrStatus[$id] = $status;
+    foreach ($objStatus as $id => $key_name) {
+      $arrStatus[$id] = $key_name;
     }
 
     return $arrStatus;

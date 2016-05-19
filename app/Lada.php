@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lada extends Model
 {
-  protected $table = "ladas";
+  protected $table = 'ladas';
 
-  protected $fillable = [];
+  protected $fillable = [
+    'key_name'
+  ];
 
   public function users() 
   {
-    return $this->hasMany('App\Users');
+    return $this->hasMany('App\User');
   }
 
   public function enterprises()
@@ -20,10 +22,10 @@ class Lada extends Model
     return $this->hasMany('App\Enterprise');
   }
 
-  public static function getLadaOptions()
+  public static function getOptions()
   {
     $arrLadas = ['' => 'Lada'];
-    $objLadas = Lada::orderBy('id', 'ASC')->where('id', '>', 1)->lists('value', 'id');
+    $objLadas = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
 
     foreach( $objLadas as $key => $value ) {
       $arrLadas[$key] = $value;

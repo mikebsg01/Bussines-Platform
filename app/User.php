@@ -12,20 +12,19 @@ class User extends Authenticatable
   protected $fillable = [
     'email', 
     'password',
-    'name',
-    'lastname',
+    'first_name',
+    'last_name',
     'phone_lada_id',
     'phone_number',
     'agree',
-    'confirmed',
-    'confirmation_code'
+    'confirmation_code',
+    'confirmed'
   ];
 
   protected $hidden = [
     'password', 
     'remember_token',
     'agree',
-    'confirmed',
     'confirmation_code'
   ];
 
@@ -44,30 +43,26 @@ class User extends Authenticatable
       return $this->hasMany('App\Enterprise');
   }
 
-  public function getNameAttribute($value)
+  public function getFirstNameAttribute($value)
   {
-    $str_lower = mb_strtolower($value,'UTF-8');
-    $str_ucwords = mb_convert_case($str_lower , MB_CASE_TITLE, "UTF-8");
-    return $value = $str_ucwords;
+    return cucwords($value);
   }
 
   public function getLastnameAttribute($value)
   {
-    $str_lower = mb_strtolower($value,'UTF-8');
-    $str_ucwords = mb_convert_case($str_lower , MB_CASE_TITLE, "UTF-8");
-    return $value = $str_ucwords;
+    return cucwords($value);
   }
 
   public function getShortNameAttribute()
   {
-    $name       = current( explode(' ', $this->name) );
-    $lastname   = current( explode(' ', $this->lastname) ); 
-    return $name . ' ' . $lastname;
+    $first_name = current(explode(' ', $this->first_name));
+    $last_name  = current(explode(' ', $this->last_name)); 
+    return $first_name . ' ' . $last_name;
   }
 
   public function getFullNameAttribute()
   { 
-    return $this->name . ' ' . $this->lastname;
+    return $this->first_name . ' ' . $this->last_name;
   }
 
 }

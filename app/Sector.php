@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sector extends Model
 {
-  protected $table = "sectors";
+  protected $table = 'sectors';
 
   protected $fillable = [
-    'name'
+    'key_name'
   ];
 
-  public function enterprises () 
+  public function enterprises() 
   {
     return $this->hasMany('App\Enterprise');
   }
@@ -20,7 +20,7 @@ class Sector extends Model
   public static function getOptions()
   {
     $arrSectors = ['Selecciona...'];
-    $objSectors = Sector::orderBy('id', 'ASC')->where('id', '>', 1)->lists('name', 'id');
+    $objSectors = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
 
     foreach( $objSectors as $key => $value ) {
       $arrSectors[$key] = $value;
