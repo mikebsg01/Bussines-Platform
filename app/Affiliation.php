@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App;
@@ -27,6 +26,6 @@ class Affiliation extends Model implements SluggableInterface
 
   public function enterprises()
   {
-    return $this->belongsToMany('App\Enterprise', 'enterprise_affiliation');
+    return $this->belongsToMany('App\Enterprise', 'enterprise_affiliation')->withTimestamps();
   }
 }

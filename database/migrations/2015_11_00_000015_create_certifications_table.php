@@ -26,6 +26,7 @@ class CreateCertificationsTable extends Migration
        */
       $table->integer('enterprise_id')->unsigned();
       $table->integer('certification_id')->unsigned();
+      $table->timestamps();
 
       /**
        * Enterprise/Certification - Foreign Keys

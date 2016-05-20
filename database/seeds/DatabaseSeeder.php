@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
         $this->call(LadaSeeder::class);
         $this->call(CountrySeeder::class);
         $this->call(EnterprisesStatusSeeder::class);
-        $this->call(EnterpriseTypesSeeder::class);
-        $this->call(EnterpriseNumEmployeesSeeder::class);
+        $this->call(EnterprisesTypesSeeder::class);
+        $this->call(EnterprisesNumEmployeesSeeder::class);
+        $this->call(RoleSeeder::class);
         $this->call(InitialDataSeeder::class);
-        // factory(App\User::class, 10)->create();
-        // factory(App\Commercial::class, 10)->create();
-        // $this->call(UserTableSeeder::class);
+        //factory(App\User::class, 10)->create();
+        factory(App\Enterprise::class, 10)->create();
     }
 }

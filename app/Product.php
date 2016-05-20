@@ -25,6 +25,6 @@ class Product extends Model implements SluggableInterface
 
   public function enterprises()
   { 
-    return $this->belongsToMany('App\Enterprise', 'enterprise_product');
+    return $this->belongsToMany('App\Enterprise', 'enterprise_product')->withTimestamps();
   }
 }

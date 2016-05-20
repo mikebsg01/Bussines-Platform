@@ -29,6 +29,7 @@ class CreateRolesTable extends Migration
        */
       $table->integer('enterprise_id')->unsigned();
       $table->integer('role_id')->unsigned();
+      $table->timestamps();
 
       /**
        * Enterprise/Role - Foreign Keys

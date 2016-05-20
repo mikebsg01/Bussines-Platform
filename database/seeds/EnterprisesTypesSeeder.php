@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class EnterpriseTypesSeeder extends Seeder
+class EnterprisesTypesSeeder extends Seeder
 {
   /**
    * Run the database seeds.
@@ -15,14 +15,14 @@ class EnterpriseTypesSeeder extends Seeder
 
     $tmp_date = date('Y-m-d H:i:s');
 
-    DB::table('enterprise_types')->insert([
+    DB::table('enterprises_types')->insert([
       'key_name'      => 'NONE',
       'created_at'    => $tmp_date,
       'updated_at'    => $tmp_date 
     ]);
 
     foreach( $enterprise_types as $key_name ) {
-      DB::table('enterprise_types')->insert([
+      DB::table('enterprises_types')->insert([
         'key_name'    => $key_name,
         'created_at'  => $tmp_date,
         'updated_at'  => $tmp_date 

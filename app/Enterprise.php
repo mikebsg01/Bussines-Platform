@@ -31,7 +31,6 @@ class Enterprise extends Model implements SluggableInterface
     'slug',
     'fiscal_name',
     'description',
-    'url_logo',
     'state',
     'city',
     'address',
@@ -39,11 +38,11 @@ class Enterprise extends Model implements SluggableInterface
     'phone_lada_id',
     'phone_number',
     'email',
-    'url_website',
     'enterprise_num_employees_id',
-    'enterprise_role_id',
     'year_established',
     'schedule',
+    'url_website',
+    'url_logo',
     'url_video',
     'incomes_year_current'
   ];
@@ -85,7 +84,7 @@ class Enterprise extends Model implements SluggableInterface
 
   public function roles()
   {
-    return $this->belongsToMany('App\Role', 'enterprise_role');
+    return $this->belongsToMany('App\Role', 'enterprise_role')->withTimestamps();
   }
 
   public function lada()
@@ -95,17 +94,17 @@ class Enterprise extends Model implements SluggableInterface
 
   public function affiliations()
   {
-    return $this->belongsToMany('App\Affiliation', 'enterprise_affiliation');
+    return $this->belongsToMany('App\Affiliation', 'enterprise_affiliation')->withTimestamps();
   }
 
   public function certifications()
   {
-    return $this->belongsToMany('App\Certification', 'enterprise_certification');
+    return $this->belongsToMany('App\Certification', 'enterprise_certification')->withTimestamps();
   }
 
   public function products()
   {
-    return $this->belongsToMany('App\Product', 'enterprise_product');
+    return $this->belongsToMany('App\Product', 'enterprise_product')->withTimestamps();
   }
 
   public function getPhoneLadaOnlyDigitsAttribute()

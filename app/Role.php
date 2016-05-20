@@ -14,6 +14,6 @@ class Role extends Model
 
   public function enterprises()
   {
-    return $this->belongsToMany('App\Enterprise', 'enterprise_role');
+    return $this->belongsToMany('App\Enterprise', 'enterprise_role')->withTimestamps();
   }
 }

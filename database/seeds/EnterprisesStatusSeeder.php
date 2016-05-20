@@ -15,7 +15,7 @@ class EnterprisesStatusSeeder extends Seeder
     
     $tmp_date = date('Y-m-d H:i:s');
 
-    DB::table('enterprise_status')->insert([
+    DB::table('enterprises_status')->insert([
       'key_name'        => 'NONE',
       'created_at'    => $tmp_date,
       'updated_at'    => $tmp_date 
@@ -25,7 +25,7 @@ class EnterprisesStatusSeeder extends Seeder
     {
       $tmp_date = date('Y-m-d H:i:s');
 
-      DB::table('enterprise_status')->insert([
+      DB::table('enterprises_status')->insert([
         'key_name'    => $key_name,
         'created_at'  => $tmp_date,
         'updated_at'  => $tmp_date 

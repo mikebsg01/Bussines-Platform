@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enterprise_Status extends Model
 {
-  protected $table = "enterprise_status";
+  protected $table = "enterprises_status";
 
   protected $fillable = [
     'key_name'

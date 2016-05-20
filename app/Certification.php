@@ -25,6 +25,6 @@ class Certification extends Model implements SluggableInterface
 
   public function enterprises()
   {
-    return $this->belongsToMany('App\Enterprise', 'enterprise_certification');
+    return $this->belongsToMany('App\Enterprise', 'enterprise_certification')->withTimestamps();
   }
 }

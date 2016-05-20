@@ -30,7 +30,7 @@ class User extends Authenticatable
 
   public function lada()
   {
-    return $this->belongsTo('App\Lada');
+    return $this->belongsTo('App\Lada', 'phone_lada_id');
   }
 
   public function register()

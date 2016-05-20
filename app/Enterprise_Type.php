@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enterprise_Type extends Model
 {
-  protected $table = 'enterprise_types';
+  protected $table = 'enterprises_types';
 
   protected $fillable = [
     'key_name'

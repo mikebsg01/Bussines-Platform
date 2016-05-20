@@ -30,6 +30,7 @@ class CreateAffiliationsTable extends Migration
        */
       $table->integer('enterprise_id')->unsigned();
       $table->integer('affiliation_id')->unsigned();
+      $table->timestamps();
 
       /**
        * Enterprise/Affiliation - Foreign Keys

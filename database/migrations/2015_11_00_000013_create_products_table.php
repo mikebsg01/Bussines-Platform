@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
        */
       $table->integer('enterprise_id')->unsigned();
       $table->integer('product_id')->unsigned();
+      $table->timestamps();
 
       /**
        * Enterprise/Product - Foreign Keys

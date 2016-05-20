@@ -25,7 +25,6 @@ class CreateEnterprisesTable extends Migration
       $table->string('slug')->nullable();
       $table->text('fiscal_name');
       $table->text('description');
-      $table->string('url_logo')->nullable();
       $table->string('state', 15);
       $table->string('city', 15);
       $table->text('address');
@@ -33,10 +32,11 @@ class CreateEnterprisesTable extends Migration
       $table->integer('phone_lada_id')->unsigned();
       $table->string('phone_number', 15);
       $table->string('email');
-      $table->string('url_website');
       $table->integer('enterprise_num_employees_id')->unsigned();
       $table->date('year_established');
       $table->text('schedule');
+      $table->string('url_website')->nullable();
+      $table->string('url_logo')->nullable();
 
       /**
        * Enterprise - Extra Fields
@@ -56,6 +56,14 @@ class CreateEnterprisesTable extends Migration
       $table->foreign('sector_id')
               ->references('id')->on('sectors')
               ->onDelete('cascade');
+
+      $table->foreign('enterprise_type_id')
+              ->references('id')->on('enterprises_types');
+              // ->onDelete('cascade');
+
+      $table->foreign('enterprise_status_id')
+              ->references('id')->on('enterprises_status');
+              // ->onDelete('cascade');
       
       $table->foreign('country_id')
               ->references('id')->on('countries');
@@ -69,16 +77,8 @@ class CreateEnterprisesTable extends Migration
               ->references('id')->on('ladas');
               // ->onDelete('cascade');
 
-      $table->foreign('enterprise_status_id')
-              ->references('id')->on('enterprise_status');
-              // ->onDelete('cascade');
-
-      $table->foreign('enterprise_type_id')
-              ->references('id')->on('enterprise_types');
-              // ->onDelete('cascade');
-
       $table->foreign('enterprise_num_employees_id')
-              ->references('id')->on('enterprise_num_employees');
+              ->references('id')->on('enterprises_num_employees');
               // ->onDelete('cascade');
 
       $table->timestamps();

@@ -600,7 +600,7 @@
       'not_verified' => 'No verificada'
     ],
 
-    'register_as' => [
+    'roles' => [
       'buyer' => 'comprador',
       'provider' => 'proveedor',
       'both' => 'ambos'
