@@ -24,7 +24,7 @@ class Enterprise extends Model implements SluggableInterface
     'user_id',
     'sector_id',
     'enterprise_type_id',
-    'enterprise_type_id',
+    'enterprise_status_id',
     'country_id',
     'aem_chapter_id',
     'name',
@@ -42,7 +42,6 @@ class Enterprise extends Model implements SluggableInterface
     'url_website',
     'enterprise_num_employees_id',
     'enterprise_role_id',
-    'num_employees',
     'year_established',
     'schedule',
     'url_video',
@@ -91,7 +90,7 @@ class Enterprise extends Model implements SluggableInterface
 
   public function lada()
   {
-    return $this->belongsTo('App\Lada');
+    return $this->belongsTo('App\Lada', 'phone_lada_id');
   }
 
   public function affiliations()

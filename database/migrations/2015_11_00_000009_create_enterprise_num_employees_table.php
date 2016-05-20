@@ -15,6 +15,7 @@ class CreateEnterpriseNumEmployeesTable extends Migration
     Schema::create('enterprise_num_employees', function(Blueprint $table) {
       $table->increments('id');
       $table->string('key_name', 25);
+      $table->timestamps();
     });
   }
 

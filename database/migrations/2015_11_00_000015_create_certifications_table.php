@@ -16,6 +16,7 @@ class CreateCertificationsTable extends Migration
       $table->increments('id');
       $table->string('name', 45);
       $table->string('slug')->nullable();
+      $table->timestamps();
     });
 
     Schema::create('enterprise_certification', function(Blueprint $table) {

@@ -11,21 +11,21 @@ class EnterpriseTypesSeeder extends Seeder
    */
   public function run()
   {
-    $enterprise_types = config('variables.enterprise_type');
+    $enterprise_types = array_keys(config('variables.enterprise_type'));
+
+    $tmp_date = date('Y-m-d H:i:s');
 
     DB::table('enterprise_types')->insert([
-      'key'           => 'NONE',
-      'value'         => '',
-      'created_at'    => date('Y-m-d H:i:s'),
-      'updated_at'    => date('Y-m-d H:i:s') 
+      'key_name'      => 'NONE',
+      'created_at'    => $tmp_date,
+      'updated_at'    => $tmp_date 
     ]);
 
-    foreach( $enterprise_types as $key => $value ) {
+    foreach( $enterprise_types as $key_name ) {
       DB::table('enterprise_types')->insert([
-        'key'           => $key,
-        'value'         => $value,
-        'created_at'    => date('Y-m-d H:i:s'),
-        'updated_at'    => date('Y-m-d H:i:s') 
+        'key_name'    => $key_name,
+        'created_at'  => $tmp_date,
+        'updated_at'  => $tmp_date 
       ]);
     }
   }

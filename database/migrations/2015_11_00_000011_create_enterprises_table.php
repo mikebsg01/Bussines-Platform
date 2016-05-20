@@ -35,7 +35,6 @@ class CreateEnterprisesTable extends Migration
       $table->string('email');
       $table->string('url_website');
       $table->integer('enterprise_num_employees_id')->unsigned();
-      $table->string('num_employees', 15);
       $table->date('year_established');
       $table->text('schedule');
 

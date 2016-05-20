@@ -24,6 +24,7 @@ return array(
     'CreateSectorsTable' => $baseDir . '/database/migrations/2015_11_00_000004_create_sectors_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2015_11_00_000002_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'EnterpriseNumEmployeesSeeder' => $baseDir . '/database/seeds/EnterpriseNumEmployeesSeeder.php',
     'EnterpriseTypesSeeder' => $baseDir . '/database/seeds/EnterpriseTypesSeeder.php',
     'EnterprisesStatusSeeder' => $baseDir . '/database/seeds/EnterprisesStatusSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
