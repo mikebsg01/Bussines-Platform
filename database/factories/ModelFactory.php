@@ -5,6 +5,9 @@ use App\User;
 use App\Enterprise;
 use App\Enterprises_Type;
 use App\Enterprises_Status;
+use App\Product;
+use App\Affiliation;
+use App\Certification;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +33,22 @@ $factory->define(User::class, function (Generator $faker) {
     'confirmed'       => 1
   ];
 });
+  
+$factory->define(Product::class, function (Generator $faker) {
+  return [
+    'name' => $faker->text(mt_rand(6,25))
+  ];
+});
 
 $factory->define(Affiliation::class, function (Generator $faker) {
   return [
-    ''
+    'name' => $faker->company
+  ];
+});
+
+$factory->define(Certification::class, function (Generator $faker) {
+  return [
+    'name' => $faker->company
   ];
 });
 
@@ -51,7 +66,7 @@ $factory->define(Enterprise::class, function (Generator $faker) {
     'aem_chapter_id'                  => mt_rand(2, count(config('variables.aem_chapter')) + 1),
     'name'                            => $faker->company,
     'fiscal_name'                     => $faker->company,
-    'description'                     => $faker->text(mt_rand(1,2050)),
+    'description'                     => $faker->text(mt_rand(6,2050)),
     'state'                           => $faker->state,
     'city'                            => $faker->city,
     'address'                         => $faker->address,
@@ -65,67 +80,3 @@ $factory->define(Enterprise::class, function (Generator $faker) {
     'url_logo'                        => current($tmp_image),
   ];
 });
-
-/*
-$factory->define(Enterprise::class, function (Generator $faker) use ($factory) {
-  $users  = User::all()->lists('id');
-  $tmp = [];
-  preg_match("/(([\w]{1,}).(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF))$/", $faker->image(public_path().'/images/enterprises'), $tmp);
-  return [
-    'name'            => $faker->company,
-    'url_logo'        => current($tmp),
-    'description'     => $faker->text(mt_rand(1,2050)),
-    'fiscal_name'     => $faker->company,
-    'country_id'      => mt_rand(2, count(config('variables.countries')) + 1),
-    'state'           => $faker->state,
-    'city'            => $faker->city,
-    'aem_type_id'     => mt_rand(2, count(config('variables.aem_type')) + 1),
-    'address'         => $faker->address,
-    'codepostal'      => gNumberStringRandom(5),
-    'phone_lada_id'   => mt_rand(2, count(config('variables.lada')) + 1),
-    'phone_number'    => gNumberStringRandom(10),
-    'email'           => $faker->email,
-    'url_website'     => $faker->url(),
-    'user_id'         => $users[mt_rand(0, count($users) - 1)],
-    'sector_id'       => mt_rand(2, count(config('variables.sector')) + 1),
-    'enterprise_status_id'       => mt_rand(2, count(config('variables.enterprise_status')) + 1)
-  ];
-});
-
-$factory->define(Commercial::class, function (Generator $faker) {
-  $num_employees  = array_keys(config('variables.num_employees'));
-  return [
-    'year_established'      => $faker->date('Y-m-d', 'now'),
-    'num_employees'         => $num_employees[mt_rand(0, count($num_employees) - 1)],
-    'products_and_services' => function () use ($faker) {
-      $arr = [];
-      for ($i = 0; $i < mt_rand(0, 150); ++$i)
-      {
-        array_push($arr, $faker->userName());
-      }
-      $str = json_encode($arr);
-      return $str;
-    },
-    'affiliations' => function () use ($faker) {
-      $arr = [];
-      for ($i = 0; $i < mt_rand(0, 150); ++$i)
-      {
-        array_push($arr, $faker->userName());
-      }
-      $str = json_encode($arr);
-      return $str;
-    },
-    'certifications' => function () use ($faker) {
-      $arr = [];
-      for ($i = 0; $i < mt_rand(0, 150); ++$i)
-      {
-        array_push($arr, $faker->userName());
-      }
-      $str = json_encode($arr);
-      return $str;
-    },
-    'enterprise_type_id'    => mt_rand(2, count(config('variables.enterprise_type'))),
-    'enterprise_id'         => factory(Enterprise::class)->create()->id
-  ];
-});
-*/

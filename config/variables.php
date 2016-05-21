@@ -549,7 +549,7 @@
       'aem_guadalajara' => 'AEM Guadalajara',
       'aem_ensenada'    => 'AEM Ensenada',
       'aem_mexicali'    => 'AEM Mexicali',
-      'aem_tijuana'     => 'AEM Tijuana', 
+      'aem_tijuana'     => 'AEM Tijuana',
       'aem_veracruz'    => 'AEM Veracruz',
       'aem_saltillo'    => 'AEM Saltillo',
       'aem_monclova'    => 'AEM Monclova',

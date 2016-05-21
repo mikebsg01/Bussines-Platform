@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EnterprisesNumEmployeesSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(InitialDataSeeder::class);
-        //factory(App\User::class, 10)->create();
         factory(App\Enterprise::class, 10)->create();
+        factory(App\Product::class, 10)->create();
+        factory(App\Affiliation::class, 10)->create();
+        factory(App\Certification::class, 10)->create();
     }
 }

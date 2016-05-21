@@ -139,6 +139,5 @@ class InitialDataSeeder extends Seeder
     $user->register->updateProgress('enterprise');
     $user->register->updateProgress('commercial');
     $user->register->updateProgress('as');
-
   }
 }
