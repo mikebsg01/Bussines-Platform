@@ -166,7 +166,7 @@ class Enterprise extends Model implements SluggableInterface
               }
               for ($i = 1; $i < $n; ++$i) {
                 $query->orWhere('country.value', '=', $attr->values[$i]);
-              }  
+              }
             });
           break;
 

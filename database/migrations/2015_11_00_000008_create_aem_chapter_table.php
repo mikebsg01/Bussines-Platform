@@ -12,7 +12,7 @@ class CreateAemChapterTable extends Migration
    */
   public function up()
   {
-    Schema::create('aem_chapter', function (Blueprint $table) {
+    Schema::create('aem_chapters', function (Blueprint $table) {
       $table->increments('id');
       $table->string('key_name');
       $table->timestamps();
@@ -26,6 +26,6 @@ class CreateAemChapterTable extends Migration
    */
   public function down()
   {
-    Schema::drop('aem_chapter');
+    Schema::drop('aem_chapters');
   }
 }

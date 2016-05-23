@@ -254,7 +254,7 @@
       'ZW'   =>    'Zimbabwe'
     ],
 
-    'lada' => [ 
+    'ladas' => [ 
       'AF'   =>    'Afganistán ‏(‎+93)',
       'AL'   =>    'Albania ‏(‎+355)',
       'DZ'   =>    'Argelia ‏(‎+213)',
@@ -493,7 +493,7 @@
       'ZW'   =>    'Zimbabue ‏(‎+263)'
     ],
 
-    'sector' => [
+    'sectors' => [
       'Accounting, Auditing & Bookkeeping'   => 'Accounting, Auditing & Bookkeeping',
       'Architecture & Design Services' => 'Architecture & Design Services',
       'Art & Antiques'     => 'Art & Antiques',
@@ -542,7 +542,7 @@
       'Other' => 'Other',
     ],
 
-    'aem_chapter' => [
+    'aem_chapters' => [
       'aem_qro'         => 'AEM Querétaro',
       'aem_df'          => 'AEM Distrito Federal',
       'aem_monterrey'   => 'AEM Monterrey', 
@@ -589,7 +589,7 @@
       'more_500'              => '500+'
     ],
 
-    'enterprise_type' => [
+    'enterprise_types' => [
       'pyme' => 'PyME',
       'mediana' => 'Mediana',
       'grande' => 'Grande'

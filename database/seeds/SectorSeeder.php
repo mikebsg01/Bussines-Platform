@@ -11,7 +11,7 @@ class SectorSeeder extends Seeder
    */
   public function run()
   {
-    $sectors = array_keys(config('variables.sector'));
+    $sectors = array_keys(config('variables.sectors'));
 
     $tmp_date = date('Y-m-d H:i:s');
 
@@ -21,7 +21,7 @@ class SectorSeeder extends Seeder
       'updated_at'  => $tmp_date
     ]);
 
-    foreach( $sectors as $key_name ) {
+    foreach ($sectors as $key_name) {
 
       $tmp_date = date('Y-m-d H:i:s');
 

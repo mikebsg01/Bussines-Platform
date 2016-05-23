@@ -535,5 +535,6 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'SectorSeeder' => $baseDir . '/database/seeds/SectorSeeder.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
+    'TestSeeder' => $baseDir . '/database/seeds/TestSeeder.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
 );

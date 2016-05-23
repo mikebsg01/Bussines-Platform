@@ -70,7 +70,7 @@ class CreateEnterprisesTable extends Migration
               // ->onDelete('cascade');
 
       $table->foreign('aem_chapter_id')
-              ->references('id')->on('aem_chapter');
+              ->references('id')->on('aem_chapters');
               // ->onDelete('cascade');
 
       $table->foreign('phone_lada_id')

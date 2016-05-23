@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AEM_Chapter extends Model
 {
-  protected $table = 'aem_chapter';
+  protected $table = 'aem_chapters';
 
   protected $fillable = [
     'key_name'

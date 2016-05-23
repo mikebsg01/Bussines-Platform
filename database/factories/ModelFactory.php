@@ -27,7 +27,7 @@ $factory->define(User::class, function (Generator $faker) {
     'remember_token'  => str_random(10),
     'first_name'      => $faker->firstName,
     'last_name'       => $faker->lastname,
-    'phone_lada_id'   => mt_rand(2, count(config('variables.lada')) + 1),
+    'phone_lada_id'   => mt_rand(2, count(config('variables.ladas')) + 1),
     'phone_number'    => gNumberStringRandom(10),
     'agree'           => 1,
     'confirmed'       => 1
@@ -59,11 +59,11 @@ $factory->define(Enterprise::class, function (Generator $faker) {
 
   return [
     'user_id'                         => factory(User::class)->create()->id,
-    'sector_id'                       => mt_rand(2, count(config('variables.sector')) + 1),
-    'enterprise_type_id'              => mt_rand(2, count(config('variables.enterprise_type')) + 1),
+    'sector_id'                       => mt_rand(2, count(config('variables.sectors')) + 1),
+    'enterprise_type_id'              => mt_rand(2, count(config('variables.enterprise_types')) + 1),
     'enterprise_status_id'            => mt_rand(2, count(config('variables.enterprise_status')) + 1),
     'country_id'                      => mt_rand(2, count(config('variables.countries')) + 1),
-    'aem_chapter_id'                  => mt_rand(2, count(config('variables.aem_chapter')) + 1),
+    'aem_chapter_id'                  => mt_rand(2, count(config('variables.aem_chapters')) + 1),
     'name'                            => $faker->company,
     'fiscal_name'                     => $faker->company,
     'description'                     => $faker->text(mt_rand(6,2050)),
@@ -71,7 +71,7 @@ $factory->define(Enterprise::class, function (Generator $faker) {
     'city'                            => $faker->city,
     'address'                         => $faker->address,
     'codepostal'                      => gNumberStringRandom(5),
-    'phone_lada_id'                   => mt_rand(2, count(config('variables.lada')) + 1),
+    'phone_lada_id'                   => mt_rand(2, count(config('variables.ladas')) + 1),
     'phone_number'                    => gNumberStringRandom(10),
     'email'                           => $faker->email,
     'enterprise_num_employees_id'     => mt_rand(2, count(config('variables.enterprise_num_employees')) + 1),

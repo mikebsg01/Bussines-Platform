@@ -11,10 +11,10 @@ class AEMChapterSeeder extends Seeder
    */
   public function run()
   {
-    $aem_chapter  = array_keys(config('variables.aem_chapter'));
+    $aem_chapter  = array_keys(config('variables.aem_chapters'));
     $tmp_date     = date('Y-m-d H:i:s'); 
 
-    DB::table('aem_chapter')->insert([
+    DB::table('aem_chapters')->insert([
       'key_name'         => 'NONE',
       'created_at'  => $tmp_date,
       'updated_at'  => $tmp_date
@@ -24,7 +24,7 @@ class AEMChapterSeeder extends Seeder
     {
       $tmp_date = date('Y-m-d H:i:s'); 
 
-      DB::table('aem_chapter')->insert([
+      DB::table('aem_chapters')->insert([
         'key_name'    => $key_name,
         'created_at'  => $tmp_date,
         'updated_at'  => $tmp_date

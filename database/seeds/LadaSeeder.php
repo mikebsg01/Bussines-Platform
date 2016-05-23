@@ -11,7 +11,7 @@ class LadaSeeder extends Seeder
    */
   public function run()
   {
-    $ladas = array_keys(config('variables.lada'));
+    $ladas = array_keys(config('variables.ladas'));
 
     $tmp_date = date('Y-m-d H:i:s');
 

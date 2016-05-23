@@ -11,7 +11,7 @@ class EnterprisesTypesSeeder extends Seeder
    */
   public function run()
   {
-    $enterprise_types = array_keys(config('variables.enterprise_type'));
+    $enterprise_types = array_keys(config('variables.enterprise_types'));
 
     $tmp_date = date('Y-m-d H:i:s');
 
@@ -21,7 +21,7 @@ class EnterprisesTypesSeeder extends Seeder
       'updated_at'    => $tmp_date 
     ]);
 
-    foreach( $enterprise_types as $key_name ) {
+    foreach ($enterprise_types as $key_name) {
       DB::table('enterprises_types')->insert([
         'key_name'    => $key_name,
         'created_at'  => $tmp_date,
