@@ -91,11 +91,11 @@
                 <div class="form-rows col-xs-12 no-padding">
                   <div class="col-xs-12 col-sm-6">
                     
-                    {{ Form::label('aem_type_id', 'Capítulo AEM: ') }}
-                    {{ Form::select('aem_type_id', \App\AEM_Type::getOptions(), old('aem_type_id') ?: $enterprise->aem_type_id, ['class' => 'form-control' . ($errors->has('aem_type_id') ? ' has-error' : ''), 'required' => 'required']) }}
-                    @if ($errors->has('aem_type_id'))
+                    {{ Form::label('aem_chapter_id', 'Capítulo AEM: ') }}
+                    {{ Form::select('aem_chapter_id', $aem_chapters, old('aem_chapter_id') ?: $enterprise->aem_chapter_id, ['class' => 'form-control' . ($errors->has('aem_chapter_id') ? ' has-error' : ''), 'required' => 'required']) }}
+                    @if ($errors->has('aem_chapter_id'))
                       <span class="help-block">
-                        <strong>{{ $errors->first('aem_type_id') }}</strong>
+                        <strong>{{ $errors->first('aem_chapter_id') }}</strong>
                       </span>
                     @endif
 

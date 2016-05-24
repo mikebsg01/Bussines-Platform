@@ -20,11 +20,12 @@ class Country extends Model
 
   public static function getOptions()
   {
+    $countries    = config('variables.countries');
     $arrCountries = ['' => 'Selecciona...'];
     $objCountries = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
     
-    foreach ($objCountries as $key => $value) {
-      $arrCountries[$key] = $value;
+    foreach ($objCountries as $id => $key_name) {
+      $arrCountries[$key_name] = $countries[$key_name];
     }
 
     return $arrCountries;

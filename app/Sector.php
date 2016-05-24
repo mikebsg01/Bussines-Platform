@@ -19,11 +19,12 @@ class Sector extends Model
 
   public static function getOptions()
   {
-    $arrSectors = ['Selecciona...'];
+    $sectors    = config('variables.sectors');
+    $arrSectors = ['' => 'Selecciona...'];
     $objSectors = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
 
-    foreach( $objSectors as $key => $value ) {
-      $arrSectors[$key] = $value;
+    foreach( $objSectors as $id => $key_name ) {
+      $arrSectors[$key_name] = $sectors[$key_name];
     }
 
     return $arrSectors;

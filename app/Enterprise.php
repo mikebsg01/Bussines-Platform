@@ -67,19 +67,19 @@ class Enterprise extends Model implements SluggableInterface
     return $this->belongsTo('App\AEM_Chapter');
   }
 
-  public function enterprise_status()
+  public function status()
   {
-    return $this->belongsTo('App\Enterprise_Status');
+    return $this->belongsTo('App\Enterprise_Status', 'enterprise_status_id');
   }
 
-  public function enterprise_type()
+  public function type()
   {
-    return $this->belongsTo('App\Enterprise_Type');
+    return $this->belongsTo('App\Enterprise_Type', 'enterprise_type_id');
   }
 
-  public function enterprise_num_employees()
+  public function num_employees()
   {
-    return $this->belongsTo('App\Enterprise_Num_Employees');
+    return $this->belongsTo('App\Enterprise_Num_Employees', 'enterprise_num_employees_id');
   }
 
   public function roles()
@@ -87,14 +87,34 @@ class Enterprise extends Model implements SluggableInterface
     return $this->belongsToMany('App\Role', 'enterprise_role')->withTimestamps();
   }
 
+  public function role()
+  {
+    return $this->roles->first();
+  }
+
   public function lada()
   {
     return $this->belongsTo('App\Lada', 'phone_lada_id');
   }
 
+  public function products()
+  {
+    return $this->belongsToMany('App\Product', 'enterprise_product')->withTimestamps();
+  }
+
+  public function products_to_array() 
+  {
+    return $this->products()->lists('name')->toArray();
+  } 
+
   public function affiliations()
   {
     return $this->belongsToMany('App\Affiliation', 'enterprise_affiliation')->withTimestamps();
+  }
+
+  public function affiliations_to_array() 
+  {
+    return $this->affiliations()->lists('name')->toArray();
   }
 
   public function certifications()
@@ -102,9 +122,9 @@ class Enterprise extends Model implements SluggableInterface
     return $this->belongsToMany('App\Certification', 'enterprise_certification')->withTimestamps();
   }
 
-  public function products()
+  public function certifications_to_array() 
   {
-    return $this->belongsToMany('App\Product', 'enterprise_product')->withTimestamps();
+    return $this->certifications()->lists('name')->toArray();
   }
 
   public function getPhoneLadaOnlyDigitsAttribute()

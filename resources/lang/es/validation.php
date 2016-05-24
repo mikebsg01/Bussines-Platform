@@ -175,11 +175,11 @@ return [
       'max'           => 'El nombre de la ciudad no puede tener más de :max carácteres.'
     ],
 
-    'aem_type_id' => [
-      'required'      => 'Por favor, seleccione el AEM al que pertenece.',
-      'integer'       => 'Por favor, seleccione el AEM al que pertenece.',
-      'min'           => 'Por favor, seleccione el AEM al que pertenece.',
-      'exists'        => 'Tipo de AEM inválida.'
+    'aem_chapter_id' => [
+      'required'      => 'Por favor, seleccione a que capítulo AEM pertenece.',
+      'integer'       => 'Por favor, seleccione a que capítulo AEM pertenece.',
+      'min'           => 'Por favor, seleccione a que capítulo AEM pertenece.',
+      'exists'        => 'Capítulo AEM inválido.'
     ],
 
     'address' => [

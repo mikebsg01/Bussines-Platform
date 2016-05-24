@@ -19,12 +19,13 @@ class Enterprise_Type extends Model
 
   public static function getOptions()
   {
-    $arrEnterpriseTypes = ['', 'Selecciona..'];
+    $enterprises_types  = config('variables.enterprise_types');
+    $arrEnterpriseTypes = ['' => 'Selecciona...'];
     $objEnterpriseTypes = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
 
-    foreach( $objEnterpriseTypes as $key => $value ) 
+    foreach( $objEnterpriseTypes as $id => $key_name ) 
     {
-      $arrEnterpriseTypes[$key] = $value;
+      $arrEnterpriseTypes[$key_name] = $enterprises_types[$key_name];
     }
     return $arrEnterpriseTypes;
   }

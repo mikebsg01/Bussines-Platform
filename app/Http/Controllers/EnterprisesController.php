@@ -13,8 +13,8 @@ use App\Http\Controllers\Controller;
 use App\Enterprise;
 use App\Country;
 use App\Lada;
+use App\AEM_Chapter;
 use App\Register;
-
 
 class EnterprisesController extends Controller
 {
@@ -45,7 +45,8 @@ class EnterprisesController extends Controller
 
     $prefix       = $this->getRouter()->getCurrentRoute()->getPrefix();
     $countries    = Country::getOptions();
-    $ladas        = Lada::getLadaOptions();
+    $ladas        = Lada::getOptions();
+    $aem_chapters = AEM_Chapter::getOptions();
 
     return view('register.enterprise')
       ->with([
@@ -54,6 +55,7 @@ class EnterprisesController extends Controller
                                 $this->register->progressWithCurrentStep : null,
         'countries'         =>  $countries,
         'ladas'             =>  $ladas,
+        'aem_chapters'      =>  $aem_chapters,
         'enterprise'        =>  $this->register->enterprise ?
                                 $this->user->enterprises->first() : ( new Enterprise() )
       ]);
@@ -90,20 +92,20 @@ class EnterprisesController extends Controller
     }
 
     $validator = Validator::make($request->all(), [
-      'name'          => 'required|max:45|unique:enterprises,name'
+      'name'            => 'required|max:45|unique:enterprises,name'
                           . ( $is_new_enteprise ? null : (',' . $enterprise->id) ),
-      'url_logo'      => 'mimes:jpeg,png,bmp,gif,svg',
-      'description'   => 'required|min:10|max:250', 
-      'fiscal_name'   => 'required|max:250',
-      'country_id'    => 'required|integer|min:2|exists:countries,id',
-      'state'         => 'required|max:25',
-      'aem_type_id'   => 'required|integer|min:2|exists:aem_types,id',
-      'address'       => 'required|max:250',
-      'codepostal'    => 'required|size:5',
-      'phone_lada_id' => 'required|integer|min:2|exists:ladas,id',
-      'phone_number'  => 'required|regex:/^[0-9]{10,15}$/',
-      'email'         => 'required|email|max:255',
-      'url_website'   => 'url'
+      'url_logo'        => 'mimes:jpeg,png,bmp,gif,svg',
+      'description'     => 'required|min:10|max:250', 
+      'fiscal_name'     => 'required|max:250',
+      'country_id'      => 'required|exists:countries,key_name',
+      'state'           => 'required|max:25',
+      'aem_chapter_id'  => 'required|exists:aem_chapters,key_name',
+      'address'         => 'required|max:250',
+      'codepostal'      => 'required|size:5',
+      'phone_lada_id'   => 'required|exists:ladas,key_name',
+      'phone_number'    => 'required|regex:/^[0-9]{10,15}$/',
+      'email'           => 'required|email|max:255',
+      'url_website'     => 'url'
     ]);
 
     if ($validator->fails())
@@ -115,6 +117,9 @@ class EnterprisesController extends Controller
     else 
     {
       $enterprise->fill($request->except('url_logo'));
+      $enterprise->country_id = Country::whereKeyName($request->input('country_id'))->first()->id;
+      $enterprise->aem_chapter_id = AEM_Chapter::whereKeyName($request->input('aem_chapter_id'))->first()->id;
+      $enterprise->phone_lada_id = Lada::whereKeyName($request->input('phone_lada_id'))->first()->id;
 
       $logo = [
         'file' => null, 
@@ -203,9 +208,9 @@ class EnterprisesController extends Controller
           'alias' => 'c',
           'class' => \App\Country::class
         ],
-        'aem_type' => [
+        'aem_chapter' => [
           'alias' => 'a',
-          'class' => \App\AEM_Type::class
+          'class' => \App\AEM_Chapter::class
         ],
         'enterprise_status' => [
           'alias' => 'status',

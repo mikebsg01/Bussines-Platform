@@ -34,13 +34,13 @@
           <div class="col-xs-3 text-center no-padding">
             <h4 class="inline-block">
               <span class="fa fa-map-marker"></span> 
-              {{ $enterprise->aem_type->value }}
+              {{ $enterprise->aem_chapter->key_name }}
             </h4>
           </div>
           <div class="col-xs-3 text-center no-padding">
             <h4 class="inline-block">
               <span class="fa fa-birthday-cake"></span>
-              Fundadada en {{ $enterprise->commercial->founded }}
+              Fundadada en {{ $enterprise->founded }}
             </h4>
           </div>
           <div class="col-xs-2 text-center no-padding">
@@ -106,7 +106,7 @@
                   </div>
                   <div class="col-xs-6 no-padding">
                     <p class="data-content">
-                      {{ arrayToTags($enterprise->commercial->products_and_services, ", ") }}
+                      {{ arrayToTags($enterprise->products_and_services, ", ") }}
                     </p>
                   </div>
                 </div>
@@ -118,7 +118,7 @@
                   </div>
                   <div class="col-xs-6 no-padding">
                     <p class="data-content">
-                      {{ arrayToTags($enterprise->commercial->affiliations, ", ") }}
+                      {{ arrayToTags($enterprise->affiliations, ", ") }}
                     </p>
                   </div>
                 </div>
@@ -130,7 +130,7 @@
                   </div>
                   <div class="col-xs-6 no-padding">
                     <p class="data-content">
-                      {{ arrayToTags($enterprise->commercial->certifications, ", ") }}
+                      {{ arrayToTags($enterprise->certifications, ", ") }}
                     </p>
                   </div>
                 </div>
@@ -171,7 +171,7 @@
                   </div>
                   <div class="col-xs-6 no-padding">
                     <p class="data-content text-center">
-                      {{ $enterprise->commercial->num_employees }}
+                      {{ $enterprise->num_employees }}
                     </p>
                   </div>
                 </div>

@@ -20,7 +20,7 @@
                   <div class="col-xs-12 col-sm-6">
 
                     {{ Form::label('sector_id', 'Sector/Industria: ', ['class' => 'label-span-8']) }}
-                    {{ Form::select('sector_id', $sectors, $enterprise->sector_id, ['class' => 'form-control chosen-select' . ($errors->has('sector_id') ? ' has-error' : ''), 'required' => 'required']) }}
+                    {{ Form::select('sector_id', $sectors, $enterprise->sector->key_name, ['class' => 'form-control chosen-select' . ($errors->has('sector_id') ? ' has-error' : ''), 'required' => 'required']) }}
                     @if ($errors->has('sector_id'))
                       <span class="help-block">
                         <strong>{{ $errors->first('sector_id') }}</strong>
@@ -31,7 +31,7 @@
                   <div class="col-xs-12 col-sm-6">
                     
                     {{ Form::label('enterprise_type_id', 'Tipo de empresa: ', ['class' => 'label-span-8']) }}
-                    {{ Form::select('enterprise_type_id', $enterprise_types, $commercial->enterprise_type_id, ['class' => 'form-control chosen-select' . ($errors->has('enterprise_type_id') ? ' has-error' : ''), 'step' => 'any', 'aria-describedby' => 'label-incomes', 'required' => 'required' ]) }}
+                    {{ Form::select('enterprise_type_id', $enterprises_types, $enterprise->type->key_name, ['class' => 'form-control chosen-select' . ($errors->has('enterprise_type_id') ? ' has-error' : ''), 'step' => 'any', 'required' => 'required' ]) }}
                     @if ($errors->has('enterprise_type_id'))
                       <span class="help-block">
                         <strong>{{ $errors->first('enterprise_type_id') }}</strong>
@@ -44,7 +44,7 @@
                   <div class="col-xs-12 col-sm-6">
                     
                     {{ Form::label('num_employees', 'Número de empleados: ', ['class' => 'label-span-8']) }}
-                    {{ Form::select('num_employees', getNumEmployeesOptions(), $commercial->num_employees, ['class' => 'form-control chosen-select' . ($errors->has('num_employees') ? ' has-error' : ''), 'required' => 'required']) }}
+                    {{ Form::select('num_employees', $enterprises_num_employees, $enterprise->num_employees->key_name, ['class' => 'form-control chosen-select' . ($errors->has('num_employees') ? ' has-error' : ''), 'required' => 'required']) }}
                     @if ($errors->has('num_employees'))
                       <span class="help-block">
                         <strong>{{ $errors->first('num_employees') }}</strong>
@@ -52,9 +52,10 @@
                     @endif
 
                   </div>
+                  <!-- here -->
                   <div class="col-xs-12 col-sm-6">
                     {!! Form::label('year_established', 'Año en que se estableció: ', ['class' => 'label-span-8']) !!}
-                    {!! Form::text('year_established', isset($commercial->year_established) ? getDateFormat(createDateFromFormat($commercial->year_established, 'Y-m-d'), 'd/m/Y') : $date, ['class' => 'form-control text-right datetimepicker-date' . ($errors->has('year_established') ? ' has-error' : ''), 'required' => 'required']) !!}
+                    {!! Form::text('year_established', isset($enterprise->year_established) ? getDateFormat(createDateFromFormat($enterprise->year_established, 'Y-m-d'), 'd/m/Y') : $date, ['class' => 'form-control text-right datetimepicker-date' . ($errors->has('year_established') ? ' has-error' : ''), 'required' => 'required']) !!}
                     @if ($errors->has('year_established'))
                       <span class="help-block">
                         <strong>{{ $errors->first('year_established') }}</strong>
@@ -66,11 +67,11 @@
                 <div class="form-rows col-xs-12 no-padding">
                   <div class="col-xs-12 col-sm-6">
                     
-                    {{ Form::label('products_and_services', 'Productos/Servicios: ', ['class' => 'label-span-8']) }}
-                    {{ Form::text('products_and_services', arrayToTags($commercial->products_and_services, ",,;"), ['class' => 'form-control tags-input' . ($errors->has('products_and_services') ? ' has-error' : ''), 'placeholder' => 'Descripción de la empresa...', 'required' => 'required']) }}
-                    @if ($errors->has('products_and_services'))
+                    {{ Form::label('products', 'Productos/Servicios: ', ['class' => 'label-span-8']) }}
+                    {{ Form::text('products', arrayToTags($enterprise->products_to_array(), ",,;"), ['class' => 'form-control tags-input' . ($errors->has('products') ? ' has-error' : ''), 'placeholder' => 'Descripción de la empresa...', 'required' => 'required']) }}
+                    @if ($errors->has('products'))
                       <span class="help-block">
-                        <strong>{{ $errors->first('products_and_services') }}</strong>
+                        <strong>{{ $errors->first('products') }}</strong>
                       </span>
                     @endif
 
@@ -78,7 +79,7 @@
                   <div class="col-xs-12 col-sm-6">
                     
                     {{ Form::label('affiliations', 'Afiliaciones: ', ['class' => 'label-span-8']) }}
-                    {{ Form::text('affiliations', arrayToTags($commercial->affiliations, ",,;"), ['class' => 'form-control tags-input' . ($errors->has('affiliations') ? ' has-error' : '') ]) }}
+                    {{ Form::text('affiliations', arrayToTags($enterprise->affiliations_to_array(), ",,;"), ['class' => 'form-control tags-input' . ($errors->has('affiliations') ? ' has-error' : '') ]) }}
                     @if ($errors->has('affiliations'))
                       <span class="help-block">
                         <strong>{{ $errors->first('affiliations') }}</strong>
@@ -91,7 +92,7 @@
                   <div class="col-xs-12 col-sm-6">
                     
                     {{ Form::label('certifications', 'Certificaciones: ', ['class' => 'label-span-8']) }}
-                    {{ Form::text('certifications', arrayToTags($commercial->certifications, ",,;"), ['class' => 'form-control tags-input' . ($errors->has('certifications') ? ' has-error' : '') ]) }}
+                    {{ Form::text('certifications', arrayToTags($enterprise->certifications_to_array(), ",,;"), ['class' => 'form-control tags-input' . ($errors->has('certifications') ? ' has-error' : '') ]) }}
                     @if ($errors->has('certifications'))
                       <span class="help-block">
                         <strong>{{ $errors->first('certifications') }}</strong>
@@ -103,7 +104,6 @@
                     &nbsp;
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

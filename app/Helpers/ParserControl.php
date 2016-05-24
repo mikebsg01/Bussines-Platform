@@ -24,13 +24,17 @@
     {
       $x = $str; // or $x = [$str]
     }
-    return  json_encode( $x );
+    return $x;
   }
 
-  function arrayToTags($str, $delimiter)
+  function arrayToTags($array, $delimiter)
   {
-    $x    = json_decode($str);
+    $x = $array;
     $str  = ""; 
+
+    if (gettype($array) == "string") {
+      $x = json_decode($array);
+    }
 
     if (count($x) > 0)
     {

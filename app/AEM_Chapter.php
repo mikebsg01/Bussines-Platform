@@ -19,12 +19,13 @@ class AEM_Chapter extends Model
 
   public static function getOptions()
   {
+    $aem_chapters   = config('variables.aem_chapters');
     $arrAEMChapter = ['' => 'Selecciona...'];
     $objAEMChapter = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
 
-    foreach ($objAEMChapter as $key => $value)
+    foreach ($objAEMChapter as $id => $key_name)
     {
-      $arrAEMChapter[$key] = $value;
+      $arrAEMChapter[$key_name] = $aem_chapters[$key_name];
     }
     return $arrAEMChapter;
   }

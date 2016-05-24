@@ -24,11 +24,12 @@ class Lada extends Model
 
   public static function getOptions()
   {
+    $ladas    = config('variables.ladas');
     $arrLadas = ['' => 'Lada'];
     $objLadas = self::orderBy('id', 'ASC')->where('id', '>', 1)->lists('key_name', 'id');
 
-    foreach( $objLadas as $key => $value ) {
-      $arrLadas[$key] = $value;
+    foreach( $objLadas as $id => $key_name ) {
+      $arrLadas[$key_name] = $ladas[$key_name];
     }
 
     return $arrLadas;

@@ -17,11 +17,11 @@
               </div>
               <div class="col-xs-12">
 
-                @foreach( getRegisterAsOptions() as $key => $value )
+                @foreach( $roles as $key => $value )
 
                 <div class="col-xs-12">
                   <div class="space-20px"></div>
-                  {{ Form::radio('registered_as', $key, $key === $registered_as, ['id' => $key, 'data-role' => 'input-radio', 'data-title' => cucfirst($value), 'required' => 'required']) }}
+                  {{ Form::radio('role_id', $key, $key === $enterprise_role, ['id' => $key, 'data-role' => 'input-radio', 'data-title' => cucfirst($value), 'required' => 'required']) }}
                 </div>
 
                 @endforeach
@@ -29,9 +29,9 @@
               </div>
               <div class="col-xs-12">
 
-                @if ($errors->has('registered_as'))
+                @if ($errors->has('role_id'))
                 <span class="help-block margin-top-15px">
-                  <strong>{{ $errors->first('registered_as') }}</strong>
+                  <strong>{{ $errors->first('role_id') }}</strong>
                 </span>
                 @endif
 

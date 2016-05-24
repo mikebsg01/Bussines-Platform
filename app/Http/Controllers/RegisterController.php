@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use \Auth;
 use \Validator;
 use \Session;
@@ -13,6 +14,13 @@ use App\Http\Requests\RegisterDatesRequest;
 use App\Http\Controllers\Controller;
 use App\Enterprise;
 use App\Register;
+use App\Role;
+use App\Sector;
+use App\Enterprise_Num_Employees;
+use App\Enterprise_Type;
+use App\Product;
+use App\Affiliation;
+use App\Certification;
 
 class RegisterController extends Controller
 {
@@ -29,25 +37,183 @@ class RegisterController extends Controller
     }
   }
 
+  public function commercial()
+  {
+    Carbon::setLocale('es');
+
+    $prefix                     = $this->getRouter()->getCurrentRoute()->getPrefix();
+    $sectors                    = Sector::getOptions();
+    $enterprises_num_employees  = Enterprise_Num_Employees::getOptions();
+    $enterprises_types          = Enterprise_Type::getOptions();
+
+    return view('register.commercial')->with([
+      'prefix'                    =>  $prefix,
+      'register_progress'         =>  isset($this->register->progressWithCurrentStep) ? 
+                              $this->register->progressWithCurrentStep : null,
+      'date'                      =>  getDateFormat(Carbon::now(), 'd/m/Y'), // crear helper para fechas
+      'sectors'                   =>  $sectors,
+      'enterprises_num_employees' =>  $enterprises_num_employees,
+      'enterprises_types'         =>  $enterprises_types,
+      'enterprise'                =>  $this->register->enterprise ?
+                              $this->user->enterprises->first() : ( new Enterprise() )
+    ]);
+  }
+
+  public function commercial_store(Request $request)
+  {
+    Carbon::setLocale('es');
+
+    $is_new_commercial = ! ((bool) $this->register->commercial);
+
+    if ($this->user->enterprises->count() > 0)
+    {
+      $enterprise = $this->user->enterprises->first();
+    } 
+    else 
+    {
+      return abort(403, 'Unauthorized action.');
+    }
+
+    $validator = Validator::make($request->all(), [
+      'sector_id'             => 'required|exists:sectors,key_name',
+      'enterprise_type_id'    => 'required|exists:enterprises_types,key_name',
+      'num_employees'         => 'required|exists:enterprises_num_employees,key_name',
+      'year_established'      => 'required|date_format:d/m/Y|before:tomorrow',
+      'products'              => 'required'
+    ]);
+
+    if ($validator->fails())
+    {
+      return redirect()->route('register.commercial.index')
+              ->withErrors($validator)
+              ->withInput();
+    }
+    else 
+    {
+      $enterprise->fill($request->all());
+
+      $enterprise->sector_id = Sector::whereKeyName($request->input('sector_id'))->first()->id;
+      $enterprise->enterprise_type_id = Enterprise_Type::whereKeyName($request->input('enterprise_type_id'))->first()->id;
+
+      /**
+       * Relationship:  Enterprises/Products
+       * Type:          Many To Many
+       * ===================================================== //
+       */
+      $tmp_arr_elements = [];
+      $tmp_arr          = tagsToArray($request->input('products'), ",,;");
+      $tmp_n            = count($tmp_arr);
+
+      for ($i = 0; $i <$tmp_n; ++$i) {
+        $tmp_object = new Product(['name' => $tmp_arr[$i]]);
+
+        $tmp_found = Product::whereName($tmp_object->name)->first();
+
+        if (!is_null($tmp_found)) {
+
+          array_push($tmp_arr_elements, $tmp_found->id);
+        } else {
+
+          $tmp_object->save();
+          array_push($tmp_arr_elements, $tmp_object->id);
+        }
+      }
+
+      $enterprise->products()->sync($tmp_arr_elements);
+
+      /**
+       * Relationship:  Enterprises/Affiliations
+       * Type:          Many To Many
+       * ===================================================== //
+       */
+      $tmp_arr_elements = [];
+      $tmp_arr          = tagsToArray($request->input('affiliations'), ",,;");
+      $tmp_n            = count($tmp_arr);
+
+      for ($i = 0; $i <$tmp_n; ++$i) {
+        $tmp_object = new Affiliation(['name' => $tmp_arr[$i]]);
+
+        $tmp_found = Affiliation::whereName($tmp_object->name)->first();
+
+        if (!is_null($tmp_found)) {
+
+          array_push($tmp_arr_elements, $tmp_found->id);
+        } else {
+
+          $tmp_object->save();
+          array_push($tmp_arr_elements, $tmp_object->id);
+        }
+      }
+
+      $enterprise->affiliations()->sync($tmp_arr_elements);
+
+      /**
+       * Relationship:  Enterprises/Certifications
+       * Type:          Many To Many
+       * ===================================================== //
+       */
+      $tmp_arr_elements = [];
+      $tmp_arr          = tagsToArray($request->input('certifications'), ",,;");
+      $tmp_n            = count($tmp_arr);
+
+      for ($i = 0; $i <$tmp_n; ++$i) {
+        $tmp_object = new Certification(['name' => $tmp_arr[$i]]);
+
+        $tmp_found = Certification::whereName($tmp_object->name)->first();
+
+        if (!is_null($tmp_found)) {
+
+          array_push($tmp_arr_elements, $tmp_found->id);
+        } else {
+
+          $tmp_object->save();
+          array_push($tmp_arr_elements, $tmp_object->id);
+        }
+      }
+
+      $enterprise->certifications()->sync($tmp_arr_elements);
+
+    /*
+     * Enterprise Year Established - Date with Carbon
+     * ===================================================== //
+     */
+      $enterprise->year_established = createDateFromFormat($enterprise->year_established, 'd/m/Y')->toDateString();
+
+      if ($enterprise->update())
+      {
+        if ($is_new_commercial) 
+        {
+          $this->register->updateProgress('commercial');
+        } 
+      }
+
+    }
+
+    return redirect()->route('register.as.index');
+  }
+
   public function register_as()
   {
     $prefix = $this->getRouter()->getCurrentRoute()->getPrefix();
 
     $is_new_register = ! ((bool) $this->register->as);
 
-    $registered_as = null;
+    $roles = Role::getOptions();
+
+    $enterprise_role = null;
 
     if ($this->user->enterprises->count() > 0 && !$is_new_register)
     {
-      $registered_as = $this->user->enterprises->first()->registered_as;
+      $enterprise_role = $this->user->enterprises->first()->role()->key_name;
     }
 
     return view('register.as')
       ->with([
         'prefix'            =>  $prefix,
-        'register_progress' =>  isset($this->register->progressWithCurrentStep) ? 
+        'register_progress' =>  isset($this->register->progressWithCurrentStep) ?
                                 $this->register->progressWithCurrentStep : null,
-        'registered_as'     =>  $registered_as
+        'roles'             =>  $roles,
+        'enterprise_role'   =>  $enterprise_role
       ]);
   }
 
@@ -65,7 +231,7 @@ class RegisterController extends Controller
     }
 
     $validator = Validator::make($request->all(), [
-      'registered_as'   => 'required|in:' . arrayForValidationRule(getRegisterAsOptions(), ",")
+      'role_id'   => 'required|exists:roles,key_name'
     ]);
 
     if ($validator->fails())
@@ -76,7 +242,8 @@ class RegisterController extends Controller
     }
     else
     {
-      $enterprise->registered_as = $request->registered_as;
+      $arr_roles = [Role::whereKeyName($request->input('role_id'))->first()->id];
+      $enterprise->roles()->sync($arr_roles);
       
       if ($enterprise->update())
       {

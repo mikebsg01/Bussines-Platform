@@ -97,7 +97,15 @@ Route::group(['middleware' => ['web', 'auth', 'register']], function () {
 
     Route::resource('enterprise', 'EnterprisesController');
 
-    Route::resource('commercial', 'CommercialController');
+    Route::get('commercial', [
+      'as'        => 'register.commercial.index',
+      'uses'      => 'RegisterController@commercial'
+    ]);
+
+    Route::post('commercial', [
+      'as'        => 'register.commercial.store',
+      'uses'      => 'RegisterController@commercial_store'
+    ]);
 
     Route::get('as', [
       'as'        => 'register.as.index',
