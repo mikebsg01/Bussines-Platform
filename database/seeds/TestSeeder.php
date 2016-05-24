@@ -20,10 +20,10 @@ class TestSeeder extends Seeder
      *            Certifications.
      * ===================================================== //
      */
-    factory(Enterprise::class, 10)->create();
-    factory(Product::class, 10)->create();
-    factory(Affiliation::class, 10)->create();
-    factory(Certification::class, 10)->create();
+    factory(Enterprise::class, 50)->create();
+    factory(Product::class, 50)->create();
+    factory(Affiliation::class, 50)->create();
+    factory(Certification::class, 50)->create();
 
     /**
      * Relationship:  Enterprises/Products

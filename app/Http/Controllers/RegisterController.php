@@ -75,11 +75,11 @@ class RegisterController extends Controller
     }
 
     $validator = Validator::make($request->all(), [
-      'sector_id'             => 'required|exists:sectors,key_name',
-      'enterprise_type_id'    => 'required|exists:enterprises_types,key_name',
-      'num_employees'         => 'required|exists:enterprises_num_employees,key_name',
-      'year_established'      => 'required|date_format:d/m/Y|before:tomorrow',
-      'products'              => 'required'
+      'sector_id'                     => 'required|exists:sectors,key_name',
+      'enterprise_type_id'            => 'required|exists:enterprises_types,key_name',
+      'enterprise_num_employees_id'  => 'required|exists:enterprises_num_employees,key_name',
+      'year_established'              => 'required|date_format:d/m/Y|before:tomorrow',
+      'products'                      => 'required'
     ]);
 
     if ($validator->fails())
@@ -92,8 +92,17 @@ class RegisterController extends Controller
     {
       $enterprise->fill($request->all());
 
-      $enterprise->sector_id = Sector::whereKeyName($request->input('sector_id'))->first()->id;
-      $enterprise->enterprise_type_id = Enterprise_Type::whereKeyName($request->input('enterprise_type_id'))->first()->id;
+      $enterprise->sector_id = Sector::whereKeyName(
+        $request->input('sector_id')
+      )->first()->id;
+
+      $enterprise->enterprise_type_id = Enterprise_Type::whereKeyName(
+        $request->input('enterprise_type_id')
+      )->first()->id;
+
+      $enterprise->enterprise_num_employees_id = Enterprise_Num_Employees::whereKeyName(
+          $request->input('enterprise_num_employees_id')
+      )->first()->id;
 
       /**
        * Relationship:  Enterprises/Products

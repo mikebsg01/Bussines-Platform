@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Auth;
 use App\User;
 use App\Register;
+use App\Lada;
 use Validator;
 use Log;
 
@@ -56,9 +57,9 @@ class AuthController extends Controller
     $rules = [
       'email'             => 'required|email|max:255|unique:users',
       'password'          => 'required|confirmed|min:8',
-      'name'              => 'required|min:2|max:25',        
-      'lastname'          => 'required|min:2|max:25',
-      'phone_lada_id'     => 'required|integer|min:2|exists:ladas,id',
+      'first_name'        => 'required|min:2|max:25',        
+      'last_name'         => 'required|min:2|max:25',
+      'phone_lada_id'     => 'required|exists:ladas,key_name',
       'phone_number'      => 'required|regex:/^[0-9]{10,15}$/',
       'agree'             => 'required|boolean|accepted'
     ];
@@ -79,9 +80,9 @@ class AuthController extends Controller
     $user = User::create([
       'email'               => $data['email'],
       'password'            => bcrypt($data['password']),
-      'name'                => $data['name'],
-      'lastname'            => $data['lastname'],
-      'phone_lada_id'       => $data['phone_lada_id'],
+      'first_name'          => $data['first_name'],
+      'last_name'           => $data['last_name'],
+      'phone_lada_id'       => Lada::whereKeyName($data['phone_lada_id'])->first()->id,
       'phone_number'        => $data['phone_number'],
       'agree'               => (boolean) $data['agree'],
       'confirmed '          => $data['confirmed'],

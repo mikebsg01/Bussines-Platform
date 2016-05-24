@@ -49,3 +49,10 @@
   {
     return (isset($values) && count($values) == 1 && $values[0] == "");
   }
+
+  function txti18n($type, $key_name)
+  {
+    $path = 'general.text';
+
+    return trans($path . '.' . $type . '.' . $key_name);
+  }

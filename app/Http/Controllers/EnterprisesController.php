@@ -15,6 +15,9 @@ use App\Country;
 use App\Lada;
 use App\AEM_Chapter;
 use App\Register;
+use App\Enterprise_Type;
+use App\Enterprise_Status;
+use App\Enterprise_Num_Employees;
 
 class EnterprisesController extends Controller
 {
@@ -135,11 +138,9 @@ class EnterprisesController extends Controller
 
       if ($is_new_enteprise)
       {
-
-        $arr_status = config('variables.enterprise_status');
-        $status_id = ((int) array_search('not_verified', $arr_status)) + 2;
-
-        $enterprise->enterprise_status_id = $status_id;
+        $enterprise->enterprise_type_id = Enterprise_Type::whereKeyName('NONE')->first()->id;
+        $enterprise->enterprise_status_id = Enterprise_Status::whereKeyName('not_verified')->first()->id;
+        $enterprise->enterprise_num_employees_id = Enterprise_Num_Employees::whereKeyName('NONE')->first()->id;
 
         if (! is_null($logo['file']))
         {
@@ -196,7 +197,7 @@ class EnterprisesController extends Controller
 
     $engineSearch = new EngineSearch([
       'model'   => \App\Enterprise::class,
-      'paginate' => 5,
+      'paginate' => 10,
       'request' => $request,
       'query'   => $q,
       'filters' => [

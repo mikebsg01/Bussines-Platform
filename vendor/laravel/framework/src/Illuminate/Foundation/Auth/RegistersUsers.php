@@ -69,8 +69,8 @@ trait RegistersUsers
         $this->create($request_user);
 
         $user = [
-            'name'              => $request_user['name'], 
-            'lastname'          => $request_user['lastname'],
+            'first_name'        => $request_user['first_name'], 
+            'last_name'         => $request_user['last_name'],
             'email'             => $request_user['email'], 
             'confirmation_code' => $request_user['confirmation_code']
         ];
@@ -80,7 +80,7 @@ trait RegistersUsers
           $m->from('web@urcorp.mx', 'AEM Platform');
           $m->replyTo('web@urcorp.mx', 'AEM Platform');
 
-          $m->to($user['email'], $user['name'] . ' ' . $user['lastname'])
+          $m->to($user['email'], $user['first_name'] . ' ' . $user['last_name'])
             ->subject('Confirmar correo electrónico | AEM Platform');
 
         });

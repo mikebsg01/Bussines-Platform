@@ -43,19 +43,18 @@
                 <div class="form-rows col-xs-12 no-padding">
                   <div class="col-xs-12 col-sm-6">
                     
-                    {{ Form::label('num_employees', 'Número de empleados: ', ['class' => 'label-span-8']) }}
-                    {{ Form::select('num_employees', $enterprises_num_employees, $enterprise->num_employees->key_name, ['class' => 'form-control chosen-select' . ($errors->has('num_employees') ? ' has-error' : ''), 'required' => 'required']) }}
-                    @if ($errors->has('num_employees'))
+                    {{ Form::label('enterprise_num_employees_id', 'Número de empleados: ', ['class' => 'label-span-8']) }}
+                    {{ Form::select('enterprise_num_employees_id', $enterprises_num_employees, $enterprise->num_employees->key_name, ['class' => 'form-control chosen-select' . ($errors->has('enterprise_num_employees_id') ? ' has-error' : ''), 'required' => 'required']) }}
+                    @if ($errors->has('enterprise_num_employees_id'))
                       <span class="help-block">
-                        <strong>{{ $errors->first('num_employees') }}</strong>
+                        <strong>{{ $errors->first('enterprise_num_employees_id') }}</strong>
                       </span>
                     @endif
 
                   </div>
-                  <!-- here -->
                   <div class="col-xs-12 col-sm-6">
                     {!! Form::label('year_established', 'Año en que se estableció: ', ['class' => 'label-span-8']) !!}
-                    {!! Form::text('year_established', isset($enterprise->year_established) ? getDateFormat(createDateFromFormat($enterprise->year_established, 'Y-m-d'), 'd/m/Y') : $date, ['class' => 'form-control text-right datetimepicker-date' . ($errors->has('year_established') ? ' has-error' : ''), 'required' => 'required']) !!}
+                    {!! Form::text('year_established', (isset($enterprise->year_established) && $enterprise->year_established != '0000-00-00') ? getDateFormat(createDateFromFormat($enterprise->year_established, 'Y-m-d'), 'd/m/Y') : $date, ['class' => 'form-control text-right datetimepicker-date' . ($errors->has('year_established') ? ' has-error' : ''), 'required' => 'required']) !!}
                     @if ($errors->has('year_established'))
                       <span class="help-block">
                         <strong>{{ $errors->first('year_established') }}</strong>

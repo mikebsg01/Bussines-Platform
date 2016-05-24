@@ -74,9 +74,9 @@
                   @if ($i > 0)
                     <li>
                       @if ($filterName == "enterprise_status") 
-                        <input id="{{ $filterName.'_'.$key }}" type="radio" name="{{ $engineSearch->getAlias($filterName).'[]' }}" value="{{ $value }}" data-role="input-radio" data-title="{{ trans('general.text.' . $value) }}" {{ $engineSearch->filterOptionIsChecked($filterName, $value) ? "checked" : "" }} />
+                        <input id="{{ $filterName.'_'.$key }}" type="radio" name="{{ $engineSearch->getAlias($filterName).'[]' }}" value="{{ $key }}" data-role="input-radio" data-title="{{ trans('general.text.' . $value) }}" {{ $engineSearch->filterOptionIsChecked($filterName, $key) ? "checked" : "" }} />
                       @else 
-                        <input id="{{ $filterName.'_'.$key }}" type="checkbox" name="{{ $engineSearch->getAlias($filterName).'[]' }}" value="{{ $value }}" data-role="input-radio" data-title="{{ $value }}" {{ $engineSearch->filterOptionIsChecked($filterName, $value) ? "checked" : "" }} />
+                        <input id="{{ $filterName.'_'.$key }}" type="checkbox" name="{{ $engineSearch->getAlias($filterName).'[]' }}" value="{{ $key }}" data-role="input-radio" data-title="{{ $value }}" {{ $engineSearch->filterOptionIsChecked($filterName, $key) ? "checked" : "" }} />
                       @endif
                     </li>
                   @endif
@@ -117,7 +117,7 @@
                   {{ $enterprise->name }}
                 </a>
                 <a href="#">
-                  @if ($enterprise->enterprise_status->status == 'verified')
+                  @if ($enterprise->status->key_name == 'verified')
                     <sup>
                       <span class="fa fa-check-circle" data-toggle="tooltip" data-placement="right" title="Empresa verificada"></span>
                     </sup>
@@ -126,19 +126,18 @@
               </h2>
               <h3 class="data special-title-10 inline-block pull-right">
                 <span class="fa fa-building"></span>
-                {{ $enterprise->sector->name }}
+                {{ $enterprise->sector->key_name }}
               </h3>
             </hgroup>
             <p class="enterprise-description text-ellipsis">
               {{ $enterprise->short_description(250, '...') }}
             </p>
             <p>
-              @if (!is_null($enterprise->commercial))
-                <?php $products_and_services = json_decode($enterprise->commercial->products_and_services); ?>
-                @foreach($products_and_services as $item)
-                  <div class="chip special-text-1">
-                    {{$item}}
-                  </div>
+              @if ($enterprise->products->count() > 0)
+                @foreach ($enterprise->products as $product)
+                  <a href="#" class="chip special-text-1">
+                      {{ $product->name }}
+                  </a>
                 @endforeach
               @endif
             </p>
@@ -149,16 +148,14 @@
                 <span class="fa fa-map-marker"></span>
                 {{ 
                   $enterprise->state . ', ' .  
-                  $enterprise->country->value 
+                  $enterprise->country->key_name 
                 }}
               </p>
             </div>
             <div class="col-xs-4 text-center no-padding">
               <p class="data">
                 <span class="fa fa-star"></span>
-                {{ 
-                  $enterprise->aem_type->value
-                }}
+                {{ txti18n('aem_chapters', $enterprise->aem_chapter->key_name) }}
               </p>
             </div>
             <div class="col-xs-4 no-padding text-center">

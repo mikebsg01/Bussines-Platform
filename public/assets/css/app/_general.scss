@@ -111,12 +111,15 @@
   color: #CA2C20;
  }
 
+ .cursor-pointer {
+  cursor: pointer;
+ }
+
  label {
   font-family: "Futura Book", sans-serif;
   font-size: 18px;
   font-weight: lighter !important;
  }
-
 
 .btn-invert {
   background-color: inherit !important;

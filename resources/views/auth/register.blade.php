@@ -43,22 +43,22 @@
               <div class="col-xs-12 col-md-12 form-columns-2a no-padding">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 no-padding-left">
 
-                  {!! Form::label('name', 'Nombre: ', ['class' => 'special-label-1']) !!}
-                  {!! Form::text('name', old('name'), ['class' => 'form-control' . ($errors->has('name') ? ' has-error' : ''), 'required' => 'required']) !!}
-                  @if ($errors->has('name'))
+                  {!! Form::label('first_name', 'Nombre: ', ['class' => 'special-label-1']) !!}
+                  {!! Form::text('first_name', old('first_name'), ['class' => 'form-control' . ($errors->has('first_name') ? ' has-error' : ''), 'required' => 'required']) !!}
+                  @if ($errors->has('first_name'))
                     <span class="help-block">
-                      <strong>{{ $errors->first('name') }}</strong>
+                      <strong>{{ $errors->first('first_name') }}</strong>
                     </span>
                   @endif
 
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 no-padding-right">
 
-                  {!! Form::label('lastname', 'Apellidos: ', ['class' => 'special-label-1']) !!}
-                  {!! Form::text('lastname', old('lastname'), ['class' => 'form-control' . ($errors->has('lastname') ? ' has-error' : ''), 'required' => 'required']) !!}
-                  @if ($errors->has('lastname'))
+                  {!! Form::label('last_name', 'Apellidos: ', ['class' => 'special-label-1']) !!}
+                  {!! Form::text('last_name', old('last_name'), ['class' => 'form-control' . ($errors->has('last_name') ? ' has-error' : ''), 'required' => 'required']) !!}
+                  @if ($errors->has('last_name'))
                     <span class="help-block">
-                      <strong>{{ $errors->first('lastname') }}</strong>
+                      <strong>{{ $errors->first('last_name') }}</strong>
                     </span>
                   @endif
 
@@ -68,7 +68,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 no-padding-left">
 
                   {!! Form::label('phone_lada_id', 'Celular: ', ['class' => 'special-label-1']) !!}
-                  {!! Form::select('phone_lada_id', App\Lada::getLadaOptions(), null, ['class' => 'form-control' . ($errors->has('phone_lada_id') ? ' has-error' : ''), 'required' => 'required']) !!}
+                  {!! Form::select('phone_lada_id', App\Lada::getOptions(), null, ['class' => 'form-control' . ($errors->has('phone_lada_id') ? ' has-error' : ''), 'required' => 'required']) !!}
                   @if ($errors->has('phone_lada_id'))
                     <span class="help-block">
                       <strong>{{ $errors->first('phone_lada_id') }}</strong>

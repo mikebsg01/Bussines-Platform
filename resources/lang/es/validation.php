@@ -210,7 +210,7 @@ return [
       'exists'        => 'Tipo de empresa inválido.'
     ],
 
-    'num_employees' => [
+    'enterprise_num_employees_id' => [
       'required'      => 'Por favor, seleccione el número de empleados',
       'num_employees' => 'La opción seleccionada es inválida.'
     ],
@@ -221,13 +221,14 @@ return [
       'before'        => 'Aún no ha pasado la fecha seleccionada.'
     ],
 
-    'products_and_services' => [
+    'products' => [
       'required'      => 'Por favor, introduzca los productos o servicios que provee su empresa.'
     ],
 
-    'registered_as' => [
+    'role_id' => [
       'required'      => 'Por favor, elija una opción.',
-      'in'            => 'La opción seleccionada es inválida.'
+      'in'            => 'La opción seleccionada es inválida.',
+      'exists'        => 'La opción seleccionada es inválida.'
     ],
 
     'schedule' => [

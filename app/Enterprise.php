@@ -5,8 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
-
-use App\Commercial;
+use Carbon\Carbon;
 
 class Enterprise extends Model implements SluggableInterface
 {
@@ -127,10 +126,15 @@ class Enterprise extends Model implements SluggableInterface
     return $this->certifications()->lists('name')->toArray();
   }
 
+  public function getFoundedAttribute()
+  {
+    return Carbon::createFromFormat('Y-m-d', $this->year_established)->year; 
+  }
+
   public function getPhoneLadaOnlyDigitsAttribute()
   {
     $digits = null;
-    $str    = $this->lada->value;
+    $str    = txti18n('ladas', $this->lada->key_name);
     preg_match("/(\(+.+\))/", $str, $digits);
 
     if (is_array($digits) && count($digits) > 0)
@@ -151,16 +155,17 @@ class Enterprise extends Model implements SluggableInterface
   public function scopeSearch($query, $q, $filters)
   {
     $finalQuery = $query 
-    ->join('commercial', 'commercial.enterprise_id', '=', 'enterprises.id')
+    ->join('enterprise_product', 'enterprise_product.enterprise_id', '=', 'enterprises.id')
+    ->join('products as product', 'product.id', '=', 'enterprise_product.product_id')
     ->join('sectors as sector', 'sector.id', '=', 'enterprises.sector_id')
     ->join('countries as country', 'country.id', '=', 'enterprises.country_id')
-    ->join('aem_types as aem_type', 'aem_type.id', '=', 'enterprises.aem_type_id')
+    ->join('aem_chapters as aem_chapter', 'aem_chapter.id', '=', 'enterprises.aem_chapter_id')
     ->join('enterprises_status as enterprise_status', 'enterprise_status.id', '=', 'enterprises.enterprise_status_id')
     ->where(function ($query) use ($q) {
       $query
         ->where('enterprises.name', 'LIKE', "%".$q."%")
         ->orWhere('enterprises.description', 'LIKE', "%".$q."%")
-        ->orWhere('commercial.products_and_services', 'LIKE', "%".$q."%");
+        ->orWhere('product.name', 'LIKE', "%".$q."%");
     });
 
     foreach ($filters as $filter => $attr) {                                                                    
@@ -170,10 +175,10 @@ class Enterprise extends Model implements SluggableInterface
             $finalQuery->where(function ($query) use ($attr) {
               $n = count($attr->values);
               if ($n > 0) {
-                $query->where('sector.name', '=', $attr->values[0]);
+                $query->where('sector.key_name', '=', $attr->values[0]);
               }
               for ($i = 1; $i < $n; ++$i) {
-                $query->orWhere('sector.name', '=', $attr->values[$i]);
+                $query->orWhere('sector.key_name', '=', $attr->values[$i]);
               }  
             });
           break;
@@ -182,22 +187,22 @@ class Enterprise extends Model implements SluggableInterface
             $finalQuery->where(function ($query) use ($attr) {
               $n = count($attr->values);
               if ($n > 0) {
-                $query->where('country.value', '=', $attr->values[0]);
+                $query->where('country.key_name', '=', $attr->values[0]);
               }
               for ($i = 1; $i < $n; ++$i) {
-                $query->orWhere('country.value', '=', $attr->values[$i]);
+                $query->orWhere('country.key_name', '=', $attr->values[$i]);
               }
             });
           break;
 
-          case 'aem_type':
+          case 'aem_chapter':
             $finalQuery->where(function ($query) use ($attr) {
               $n = count($attr->values);
               if ($n > 0) {
-                $query->where('aem_type.value', '=', $attr->values[0]);
+                $query->where('aem_chapter.key_name', '=', $attr->values[0]);
               }
               for ($i = 1; $i < $n; ++$i) {
-                $query->orWhere('aem_type.value', '=', $attr->values[$i]);
+                $query->orWhere('aem_chapter.key_name', '=', $attr->values[$i]);
               }  
             });
           break;
@@ -206,7 +211,7 @@ class Enterprise extends Model implements SluggableInterface
             $finalQuery->where(function ($query) use ($attr) {
               $n = count($attr->values);
               if ($n > 0) {
-                $query->where('enterprise_status.status', '=', $attr->values[0]);
+                $query->where('enterprise_status.key_name', '=', $attr->values[0]);
               }
             });
           break;
@@ -216,6 +221,7 @@ class Enterprise extends Model implements SluggableInterface
 
     $finalQuery
       ->select('enterprises.*')
+      ->groupBy('enterprises.id')
       ->orderBy('enterprises.name', 'ASC');
       
     return $finalQuery;

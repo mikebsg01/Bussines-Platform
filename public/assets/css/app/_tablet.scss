@@ -42,8 +42,8 @@
 .profile-header-container h5,
 .profile-header-container h6 {
   font-family: "Futura Heavy", sans-serif;
-  text-shadow: 1px 1px 1px #333;
-  color: #FFFFFF;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  color: #F9F9F9;
 }
 
 .profile-header-container h3,
@@ -283,16 +283,19 @@
   margin-bottom: 5px;
 }
 
-.data-container .data-box {
+.data-container .data-box,
+.data-container .data-box-mini {
   padding: 15px;
   border-bottom: 1px solid #CCC;
 }
 
-.data-container .data-box:last-child {
+.data-container .data-box:last-child,
+.data-container .data-box-mini:last-child {
   border-bottom: none;
 }
 
-.data-container .data-box .data-title {
+.data-container .data-box .data-title,
+.data-container .data-box-mini .data-title {
   margin: 10px auto 15px auto;
   font-size: 18px;
   letter-spacing: 2px;
@@ -300,7 +303,12 @@
   color: #EF4B3F;
 }
 
-.data-container .data-box .data-label {
+.data-container .data-box-mini .data-title {
+  font-size: 14px;
+}
+
+.data-container .data-box .data-label,
+.data-container .data-box-mini .data-label {
   margin-top: 5px;
   margin-bottom: 10px;
   font-family: "Futura Light", sans-serif;
@@ -308,7 +316,8 @@
   font-size: 16px;
 }
 
-.data-container .data-box .data-content {
+.data-container .data-box .data-content,
+.data-container .data-box-mini .data-content {
   margin-top: 5px;
   margin-bottom: 10px;
   font-family: "Futura Light", sans-serif;

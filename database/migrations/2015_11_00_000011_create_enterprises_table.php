@@ -25,8 +25,8 @@ class CreateEnterprisesTable extends Migration
       $table->string('slug')->nullable();
       $table->text('fiscal_name');
       $table->text('description');
-      $table->string('state', 15);
-      $table->string('city', 15);
+      $table->string('state', 25);
+      $table->string('city', 25);
       $table->text('address');
       $table->string('codepostal', 10);
       $table->integer('phone_lada_id')->unsigned();
@@ -42,6 +42,10 @@ class CreateEnterprisesTable extends Migration
        * Enterprise - Extra Fields
        * ============================================================= //
        */
+      $table->string('url_fb')->nullable();
+      $table->string('url_tw')->nullable();
+      $table->string('url_in')->nullable();
+
       $table->string('url_video')->nullable();
       $table->double('incomes_year_current', 15, 4)->default(0);
 
