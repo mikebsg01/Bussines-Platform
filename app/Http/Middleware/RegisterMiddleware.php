@@ -24,6 +24,7 @@ class RegisterMiddleware
     $register_routes  = Register::getRoutes(); // Array
     $step_name        = Register::stepName($route_name);
     
+
     if (Register::isStep($step_name)) // Si forma parte del registro
     {
       if ($register->isFinished) // Y ya terminó

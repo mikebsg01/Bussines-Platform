@@ -26,6 +26,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        //
+        $gate->define('edit-enterprise', function ($user, $enterprise) {
+            return $user->id === $enterprise->user_id;
+        });
+
+        $gate->define('view-enterprise-data', function ($user, $enterprise) {
+            return $user->id === $enterprise->user_id;
+        });
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Enterprise;
+use App\Role;
 use App\Product;
 use App\Affiliation;
 use App\Certification;
@@ -20,10 +21,10 @@ class TestSeeder extends Seeder
      *            Certifications.
      * ===================================================== //
      */
-    factory(Enterprise::class, 50)->create();
-    factory(Product::class, 50)->create();
-    factory(Affiliation::class, 50)->create();
-    factory(Certification::class, 50)->create();
+    factory(Enterprise::class, 27)->create();
+    factory(Product::class, 27)->create();
+    factory(Affiliation::class, 27)->create();
+    factory(Certification::class, 27)->create();
 
     /**
      * Relationship:  Enterprises/Products
@@ -132,7 +133,44 @@ class TestSeeder extends Seeder
           }
         }
         
-        $register->affiliations()->attach($arr);
+        $register->certifications()->attach($arr);
+        ++$attached;
+      }
+    }
+    /**
+     * Relationship:  Enterprises/Roles
+     * Type:          Many To Many
+     * ===================================================== //
+     */
+    $m = Enterprise::count();
+    $attached = 0;
+    $index = 0;
+
+    while ($attached != $m) {
+
+      $register = Enterprise::find($index++);
+
+      if (!empty($register)) {
+
+        $elements   = 0;
+        $n          = mt_rand(0, Role::count()-1);
+        $last       = Role::all()->last()->id;
+        $arr        = [];
+
+        while ($elements != $n) {
+
+          $x = mt_rand(2, $last);
+          $tmp_register = Role::find($x);
+
+          if (!empty($tmp_register)) {
+            if (!in_array($x, $arr)) {
+              array_push($arr, $x);
+              ++$elements;
+            }
+          }
+        }
+        
+        $register->roles()->attach($arr);
         ++$attached;
       }
     }

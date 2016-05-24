@@ -74,7 +74,7 @@
                   @if ($i > 0)
                     <li>
                       @if ($filterName == "enterprise_status") 
-                        <input id="{{ $filterName.'_'.$key }}" type="radio" name="{{ $engineSearch->getAlias($filterName).'[]' }}" value="{{ $key }}" data-role="input-radio" data-title="{{ trans('general.text.' . $value) }}" {{ $engineSearch->filterOptionIsChecked($filterName, $key) ? "checked" : "" }} />
+                        <input id="{{ $filterName.'_'.$key }}" type="radio" name="{{ $engineSearch->getAlias($filterName).'[]' }}" value="{{ $value }}" data-role="input-radio" data-title="{{ trans('general.text.' . $value) }}" {{ $engineSearch->filterOptionIsChecked($filterName, $value) ? "checked" : "" }} />
                       @else 
                         <input id="{{ $filterName.'_'.$key }}" type="checkbox" name="{{ $engineSearch->getAlias($filterName).'[]' }}" value="{{ $key }}" data-role="input-radio" data-title="{{ $value }}" {{ $engineSearch->filterOptionIsChecked($filterName, $key) ? "checked" : "" }} />
                       @endif
@@ -134,7 +134,7 @@
             </p>
             <p>
               @if ($enterprise->products->count() > 0)
-                @foreach ($enterprise->products as $product)
+                @foreach ($enterprise->products->take(10) as $product)
                   <a href="#" class="chip special-text-1">
                       {{ $product->name }}
                   </a>

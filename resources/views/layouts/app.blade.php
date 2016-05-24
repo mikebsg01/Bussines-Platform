@@ -75,8 +75,19 @@
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{!! Auth::user()->short_name !!}</a>
             <ul class="dropdown-menu">
-              <li><a href="{{ url('/profile', ['slug' => Auth::user()->slug]) }}">Mi Perfil</a></li>
-              <li><a href="{{ url('/logout') }}">Cerrar sesión <i class="glyphicon glyphicon-log-out"></i> </a></li>
+              <li>
+                <a href="{{ url('/profile', ['slug' => Auth::user()->enterprises->first()->slug]) }}">
+                  Mi Perfil
+                  <i class="glyphicon glyphicon-user pull-right"></i>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="{{ url('/logout') }}">
+                  Cerrar sesión 
+                  <i class="glyphicon glyphicon-log-out pull-right"></i> 
+                </a>
+              </li>
             </ul>
           </li>
           @endif 

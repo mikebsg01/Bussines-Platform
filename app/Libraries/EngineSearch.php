@@ -87,9 +87,38 @@ class EngineSearch {
     {
       $alias  = $this->getAlias($filterName);
       $params = $this->request->input($alias);
+
+      if (is_array($params)) {
+        $tmp_n = count($params);
+
+        for ($i = 0; $i < $tmp_n; ++$i) 
+        {
+          $type = null;
+
+          if ($alias == 's')
+          {
+            $type = 'sectors';
+          }
+          else if ($alias == 'c') 
+          {
+            $type = "countries";
+          }
+          else if ($alias == 'a') 
+          {
+            $type = "aem_chapters";
+          }
+          else if ($alias == 'status')
+          {
+            $type = 'enterprise_status';
+          }
+
+          $params[$i] = txti18n($type, $params[$i]);
+        }
+      }
       
       $parameters[$alias] = $params ?: [];
     }
+
     return $parameters;
   }
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \Auth;
 use \Validator;
 use \File;
+use Gate;
 use App\Libraries\EngineSearch;
 use App\Http\Requests;
 use App\Http\Requests\EnterpriseRequest;
@@ -231,6 +232,10 @@ class EnterprisesController extends Controller
   public function edit_profile($slug)
   {
     $enterprise = Enterprise::where('slug', '=', $slug)->first();
+
+    if (Gate::denies('edit-enterprise', $enterprise)) {
+      return abort(403, 'Unauthorized action.');
+    }
 
     return view('enterprise.profile.edit')
       ->with([
